@@ -5,12 +5,12 @@
       <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">МЕНЮ</span>
-        <v-spacer></v-spacer>
-        <v-btn class="text-uppercase grey--text"> 
-          <v-icon class="text-uppercase grey--text">mdi-logout-variant</v-icon>
-          <span>Выйти</span>
-        </v-btn>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn depressed class="text-uppercase grey--text"> 
+        <v-icon class="text-uppercase grey--text">mdi-logout-variant</v-icon>
+        Выйти
+      </v-btn>
 
     </v-app-bar>
 

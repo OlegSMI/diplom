@@ -1,8 +1,8 @@
 <template>
 <v-card flat style="background: transparent"> 
     <v-row>
-        <v-col>
-            <v-card class="ma-3">
+        <v-col md="4">
+            <v-card class="ml-2">
                 <v-card-title>
                     Настройка:
                 </v-card-title>
@@ -50,8 +50,9 @@
                         v-if="this.load==true"
                         indeterminate
                         color="primary"
-                      ></v-progress-linear>
-              <v-data-table
+                ></v-progress-linear>
+              <v-card-text>
+                <v-data-table
                 :headers="headers"
                 :items="users_info"
                 item-key="name"
@@ -76,7 +77,6 @@
                   </v-icon>
                 </template>
               </v-data-table>
-              <v-card-text>
                 <v-btn 
                     v-if="users_info.length>0"
                     :color="$route.meta.theme"
@@ -88,11 +88,10 @@
                     mdi-apple-keyboard-caps
                   </v-icon>
                 </v-btn>
-              </v-card-text>
-              
+              </v-card-text> 
             </v-card>
         </v-col>
-      <v-col md="9">
+      <v-col md="8">
         <v-card flat style="background: transparent">
           <Map :coords="coords" :first_coord="first_coord"
            :user="user" :center="center" :zoom="zoom" style='height: 650px; width: 100%'/>

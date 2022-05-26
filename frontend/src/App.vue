@@ -1,6 +1,6 @@
 <template >
   <v-app>
-    <Navbar v-if="vision==true"/>
+    <Navbar />
     <v-content mx-4 class="grey lighten-4" id="app">
       <router-view :vision="vision"  @updateVision="vision = $event"/>
     </v-content>
