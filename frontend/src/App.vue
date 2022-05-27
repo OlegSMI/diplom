@@ -2,7 +2,10 @@
   <v-app>
     <Navbar />
     <v-content mx-4 class="grey lighten-4" id="app">
-      <router-view :vision="vision"  @updateVision="vision = $event"/>
+      <!-- <router-view :vision="vision"
+        @updateVision="vision = $event"
+        /> -->
+        <router-view :vision="vision"/>
     </v-content>
   </v-app>
   

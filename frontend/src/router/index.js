@@ -1,32 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MyHome from '../views/MyHome.vue'
-import MyDick from '../views/MyDick.vue'
+import MyParsers from '../views/MyParsers.vue'
+import MyTableparse from '../views/MyTableparse.vue'
 import MyProjects from '../views/MyProjects.vue'
 import MyLocation from '../views/MyLocation.vue'
-import LoginForm from '../components/login/LoginForm.vue'
+// import LoginForm from '../components/login/LoginForm.vue'
 
 Vue.use(VueRouter)
 
 
 const routes = [
   {
-    path: '/home',
-    name: 'Home',
-    component: MyHome
+    path: '/',
+    name: 'parsers',
+    component: MyParsers
   },
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/MyAbout.vue')
+    component: () => import('../views/MyAbout.vue')
   },
   {
-    path: '/Dick',
-    name: 'Dick',
-    component: MyDick
+    path: '/tableparse',
+    name: 'tableparse',
+    component: MyTableparse
   },
   {
     path: '/projects',
@@ -38,11 +35,11 @@ const routes = [
     name: 'location',
     component: MyLocation
   },
-  {
-    path: '/',
-    name: 'login',
-    component: LoginForm
-  },
+  // {
+  //   path: '/',
+  //   name: 'login',
+  //   component: LoginForm
+  // },
 ]
 
 const router = new VueRouter({

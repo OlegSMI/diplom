@@ -49,7 +49,7 @@ import Popup from './MyPopup'
         links: [
           { icon: 'mdi-account-search', text: 'Парсинг', route: '/'},
           { icon: 'mdi-chart-line', text: 'График по выявленным', route: '/projects'},
-          { icon: 'mdi-account-arrow-up', text: 'Список выявленных', route: '/Dick'},
+          { icon: 'mdi-account-arrow-up', text: 'Список выявленных', route: '/tableparse'},
           { icon: 'mdi-book-open-outline', text: 'Описание', route: '/about'},
           { icon: 'mdi-map-outline', text: 'Геолокация', route: '/location'},
           { icon: 'mdi-chart-box-outline', text: 'Диаграмма', route: '/diagrams'},

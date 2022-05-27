@@ -28,8 +28,12 @@
 
 
 
-        <v-expansion-panels>
-          <v-expansion-panel v-for="task in tasks" :key="task.infouser.num_user">
+        <v-expansion-panels flat>
+          <v-expansion-panel
+           @updateTable="tasks = $event"
+           v-for="task in tasks"
+            :key="task.infouser.num_user"
+            >
             <v-expansion-panel-header>
               <v-layout wrap :class="`pa-3 gig ${task.infouser}`">
                 <v-col xs="2" md="2">
@@ -102,57 +106,21 @@
   
 </template>
 
-<style>
-
-.gig.hulia {
-  border-left: 4px solid #3cd1c2;
-}
-
-.gig.honor {
-  border-left: 4px solid green;
-}
-
-.gig.salamalekum {
-  border-left: 4px solid tomato;
-}
-
-.v-chip.hulia {
-   background: #3cd1c2 !important;
-}
-
-.v-chip.honor {
-  background: green !important;
-}
-
-.v-chip.salamalekum {
-  background: tomato !important;
-}
-
-</style>
-
 <script>
-import axios from 'axios'
 export default {
       data() {
           return {
               tasks: [''],
           }
       },
+      created() {
+        console.log(this.tasks)
+        
+      },
       methods: {
-          async getData() {
-              try {
-                  const response = await axios.get('http://localhost:8000/users');
-                  this.tasks = response.data;
-              } catch (error) {
-                  console.log(error);
-              }
-          },
-          sortBy(prop){
+      sortBy(prop){
       this.infouser.sort((a,b) => a[prop] < b[prop] ? -1 : 1);
     }
       },
-      created() {
-            this.getData();
-      }
 }
 </script>
