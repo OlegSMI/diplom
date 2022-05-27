@@ -18,6 +18,28 @@ class MilitaryOneUser(RetrieveAPIView):
     serializer_class = InfoUserSerializer
     lookup_field = 'num_user'
 
+class DataUserList()
+
+# class ListView(APIView):
+#     def get(self, request):
+#         model = InfoUser.objects.all()
+#         context = {}
+#         for i in model:
+#             data = dict_serializer(i)
+#             context[str(i)]=data
+#         return JsonResponse(context, status=201)
+
+#     @classmethod
+#     def get_extra_actions(cls):
+#         return []
+
+# class MilitaryOneUser(APIView):
+ 
+#     def get(self, request, pk):
+#         model = InfoUser.objects.get(pk=pk)
+#         data = dict_serializer(model)
+#         return JsonResponse(data, status=201)
+
 
 # def parse_detail(request, pk):
 #     model = InfoUser.objects.get(pk=pk)
