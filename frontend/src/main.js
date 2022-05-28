@@ -7,7 +7,11 @@ import vuetify from './plugins/vuetify'
 import BarGraph from "../node_modules/vue-svg-charts/src/components/bar"
 // import MyHome from './views/MyHome'
 
+// import axios from 'axios'
 Vue.config.productionTip = false
+
+// Vue.prototype.$http = axios
+// axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 new Vue({
   router,
@@ -29,4 +33,3 @@ Vue.use(BarGraph);
 
 
 
-// Vue.prototype.$http = axios;

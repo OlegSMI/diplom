@@ -2,8 +2,19 @@
 <template>
   <div class="Dashboard">
     <h1 class="subheading grey--text pa-5">ВЫЯВЛЕННЫЕ ВОЕННОСЛУЖАЩИЕ:</h1>
-
-    <v-container class="my-10">
+    <v-container
+    v-if="parseicon"
+    class="text-md-center">
+      <v-progress-circular
+      :size="50"
+      color="grey"
+      indeterminate
+    ></v-progress-circular>
+    </v-container>
+    <v-container
+    v-else
+    class="my-10" >
+      
       <v-layout row class="mb-3">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
@@ -25,40 +36,37 @@
           <span>dick</span>
         </v-tooltip>
       </v-layout>
-
-
-
         <v-expansion-panels flat>
           <v-expansion-panel
-           @updateTable="tasks = $event"
            v-for="task in tasks"
-            :key="task.infouser.num_user"
+            :key="task.num_user"
             >
             <v-expansion-panel-header>
-              <v-layout wrap :class="`pa-3 gig ${task.infouser}`">
+              <v-layout wrap :class="`pa-3 gig ${task.num_user}`">
                 <v-col xs="2" md="2">
                   <div class="caption grey--text">Имя пользователя: </div>
-                  <div>{{task.infouser.name}}</div>
+                  <div>{{task.name}}</div>
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Был в сети: </div>
-                  <div>{{task.infouser.online_status}}</div>
+                  <div>{{task.online_status}}</div>
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Статус: </div>
-                  <div>{{task.infouser.status}}</div>
+                  <div>{{task.status}}</div>
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Фото: </div>
+                  <!-- <div>{{task.photo}}</div> -->
                   <div>ФОТО</div>
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Город:</div>
-                  <div>{{task.infouser.town}}</div>
+                  <div>{{task.town}}</div>
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Языки:</div>
-                  <div>{{task.infouser.languages}}</div>
+                  <div>{{task.languages}}</div>
                 </v-col>
               </v-layout>
             </v-expansion-panel-header>
@@ -110,17 +118,38 @@
 export default {
       data() {
           return {
-              tasks: [''],
+              tasks: [],
+              parseicon: false
           }
       },
-      created() {
-        console.log(this.tasks)
+      created(){
+        this.$store.dispatch('loadItems')
         
+        if(this.$store.getters.getState===true){
+          if(this.$store.getters.getCount===0){
+            setTimeout(this.theOneFunc, 8 * 1000, 8);
+            this.parseicon = true;
+            this.tasks = this.$store.getters.getItems
+            this.$store.dispatch('setCount', 1)
+            console.log(this.$store.getters.getCount)
+          }
+          else{
+            this.parseicon = false;
+            this.tasks = this.$store.getters.getItems
+          }
+          
+        }
       },
       methods: {
-      sortBy(prop){
-      this.infouser.sort((a,b) => a[prop] < b[prop] ? -1 : 1);
-    }
-      },
+    //   sortBy(prop){
+    //   this.infouser.sort((a,b) => a[prop] < b[prop] ? -1 : 1);
+    // }
+    theOneFunc(){
+    this.parseicon = false
+  }
+},
+      
+      
+
 }
 </script>

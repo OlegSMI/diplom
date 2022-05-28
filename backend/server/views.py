@@ -18,7 +18,7 @@ class MilitaryOneUser(RetrieveAPIView):
     serializer_class = InfoUserSerializer
     lookup_field = 'num_user'
 
-class DataUserList()
+# class DataUserList()
 
 # class ListView(APIView):
 #     def get(self, request):
