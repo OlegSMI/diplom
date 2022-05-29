@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MyParsers from '../views/MyParsers.vue'
 import MyTableparse from '../views/MyTableparse.vue'
-import MyProjects from '../views/MyProjects.vue'
+import MyGraph from '../views/MyGraph.vue'
 import MyLocation from '../views/MyLocation.vue'
 // import LoginForm from '../components/login/LoginForm.vue'
 
@@ -26,9 +26,9 @@ const routes = [
     component: MyTableparse
   },
   {
-    path: '/projects',
-    name: 'projects',
-    component: MyProjects
+    path: '/graph',
+    name: 'graph',
+    component: MyGraph
   },
   {
     path: '/location',

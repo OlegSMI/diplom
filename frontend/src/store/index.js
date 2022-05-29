@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     items: [],
     switch_check: false,
-    count: 0
+    count: 0,
+    user_id: ''
   },
   getters: {
     getItems(state) {

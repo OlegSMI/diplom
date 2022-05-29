@@ -4,8 +4,7 @@
 
     <v-container class="my-5">
       <v-layout row wrap>
-        {{items}}
-         <v-col xs="12" sm="6" md="4" lg="3" v-for="person in team" :key=person.name>
+         <v-col xs="12" sm="6" md="4" lg="3" v-for="person in team" :key="person.name">
            <v-card flat class="text-center ma-3">
              <v-responsive class="pt-4">
               <v-avatar size="100" class="grey lighten-2">

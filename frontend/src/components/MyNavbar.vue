@@ -20,17 +20,11 @@
           <Popup />
         </v-col>
       </v-row>
-      <v-list>
-        <v-list-tile v-for="link in links" :key="link.text" > 
+      <v-list v-for="link in links" :key="link.text" > 
           <v-list-item :to="link.route">
             <v-icon class="white--text">{{link.icon}}</v-icon>
-            <v-list-tile-title class="white--text ml-5">{{link.text}}</v-list-tile-title>
+            <v-list-item-title class="white--text ml-5">{{link.text}}</v-list-item-title>
           </v-list-item>
-          <v-list-tile-content>
-         
-          </v-list-tile-content>
-
-        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
   </nav>
@@ -48,7 +42,7 @@ import Popup from './MyPopup'
         drawer:false,
         links: [
           { icon: 'mdi-account-search', text: 'Парсинг', route: '/'},
-          { icon: 'mdi-chart-line', text: 'График по выявленным', route: '/projects'},
+          { icon: 'mdi-chart-line', text: 'График по выявленным', route: '/graph'},
           { icon: 'mdi-account-arrow-up', text: 'Список выявленных', route: '/tableparse'},
           { icon: 'mdi-book-open-outline', text: 'Описание', route: '/about'},
           { icon: 'mdi-map-outline', text: 'Геолокация', route: '/location'},

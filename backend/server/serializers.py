@@ -1,41 +1,51 @@
-from rest_framework import routers,serializers,viewsets
-from .models import *
+from rest_framework import serializers
+from .models import InfoUser, Posts, UserGroup, Friends, Comments, Geolocation
 
-class InfoUserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = InfoUser
-        fields = ['num_user', 'user_id', 'name', 'online_status', 'status', 'photo', 'town', 'languages']
-
-class UserGroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = UserGroup
-        fields = ['groups']
-
-class FriendsSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Friends
-        fields = ['friends']
-
-class PostsSerializer(serializers.HyperlinkedModelSerializer):
+class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = ['posts']
+        fields = ('id', 'posts')
 
-class CommentsSerializer(serializers.HyperlinkedModelSerializer):
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserGroup
+        fields = ('id', 'groups')
+
+class FriendsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Friends
+        fields = ('id', 'friends')
+
+class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ['comments']
+        fields = ('id', 'comments')
 
-class GeolocationSerializer(serializers.HyperlinkedModelSerializer):
+class GeolocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Geolocation
-        fields = ['location']
+        fields = ('id', 'location')
 
-class BigSerializer(serializers.Serializer):
-    infouser=InfoUserSerializer(read_only=True)
-    groups=UserGroupSerializer(read_only=True, many=True)
-    friends=FriendsSerializer(read_only=True, many=True)
-    posts=PostsSerializer(read_only=True, many=True)
-    comments=CommentsSerializer(read_only=True, many=True)
-    geolocation=GeolocationSerializer(read_only=True, many=True)
+
+class InfoUserSerializer(serializers.ModelSerializer):
+    posts = PostsSerializer(many=True)
+    comments = CommentsSerializer(many=True)
+    friends = FriendsSerializer(many=True)
+    groups = GroupSerializer(many=True)
+    geolocation = GeolocationSerializer(many=True)
+
+    class Meta:
+        model = InfoUser
+        fields = (  'num_user', 'user_id', 'name', 
+                    'online_status', 'status', 'photo',
+                    'town', 'languages', 'posts',
+                    'comments', 'friends', 'groups',
+                    'geolocation'
+                    )
+
+
+
+
+
+
 

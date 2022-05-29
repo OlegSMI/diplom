@@ -2,7 +2,7 @@
 <v-card flat style="background: transparent"> 
     <v-row>
         <v-col md="4">
-            <v-card class="ml-2">
+            <v-card class="ma-5" flat>
                 <v-card-title>
                     Настройка:
                 </v-card-title>
@@ -38,6 +38,8 @@
                     :color="$route.meta.theme"
                     class="ma-2 black--text"
                     @click="get_coordinates"
+                    text
+                    outlined
                     >
                     Загрузить
                     <v-icon right>
@@ -82,6 +84,8 @@
                     :color="$route.meta.theme"
                     class="mt-5 black--text"
                     @click="exportExcel"
+                    text
+                    outlined
                   >
                     Экспортировать
                   <v-icon right>
@@ -92,7 +96,7 @@
             </v-card>
         </v-col>
       <v-col md="8">
-        <v-card flat style="background: transparent">
+        <v-card flat style="background: transparent" class="my-5 mr-5">
           <Map :coords="coords" :first_coord="first_coord"
            :user="user" :center="center" :zoom="zoom" style='height: 650px; width: 100%'/>
         </v-card>

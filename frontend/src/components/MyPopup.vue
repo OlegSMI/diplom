@@ -32,9 +32,11 @@ import parseISO from 'date-fns/parseISO'
 export default {
     data() {
         return {
+            menu: '',
             title: '',
             content: '',
             due: null,
+            dialog: false,
             inputRules: [
                 v => v.length >= 3 || 'Fuck, overwrite, pidor'
             ]

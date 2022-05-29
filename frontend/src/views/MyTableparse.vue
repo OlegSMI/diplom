@@ -20,21 +20,19 @@
           <template v-slot:activator="{ on }">
             <v-btn small text depressed class="grey--text ml-5" @click="sortBy('name')" v-on="on">
               <v-icon left small>mdi-account</v-icon>
-              <span class="caption text-lowercase">Фильтр по имени</span>
+              <span class="caption text-lowercase">Сортировать по имени</span>
             </v-btn>
           </template>
           <span>Убывание/Возрастание</span>
         </v-tooltip>
 
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn small text depressed class="grey--text ml-5" @click="sortBy('groups')" v-on="on" >
-              <v-icon left small>mdi-account</v-icon>
-              <span class="caption text-lowercase">Фильтр по очку</span>
-            </v-btn>
-          </template>
-          <span>dick</span>
-        </v-tooltip>
+        <template >
+          <v-btn small text depressed class="grey--text ml-5" @click="sortBy('groups')" v-on="on" >
+            <v-icon left small>mdi-account</v-icon>
+            <span class="caption text-lowercase">Только с фото</span>
+          </v-btn>
+        </template>
+
       </v-layout>
         <v-expansion-panels flat>
           <v-expansion-panel
@@ -75,28 +73,90 @@
                 <v-card-text>
                   <v-layout>
                     <v-col>
-                      <div class="caption grey--text">Группы:</div>
-                      <div v-for="group in task.groups" :key="group">·{{group.groups}}</div>
+                      <v-card
+                      flat
+                      class="pa-2"
+                      color="#E9E9E9"
+                      light
+                      >
+                        <v-card-title class="pa-2 grey--text">
+                          <h5>Группы:</h5>
+                        </v-card-title>
+                        <div class="ma-2" v-for="group in task.groups" :key="group">
+                          {{group.groups}}
+                          <v-divider></v-divider>
+                        </div>
+                      </v-card>
                     </v-col>
+
                     <v-col>
-                      <div class="caption grey--text">Друзья:</div>
-                      <div v-for="friend in task.friends" :key="friend">·{{friend.friends}}</div>
+                      <v-card
+                      flat
+                      class="pa-2"
+                      color="#E9E9E9"
+                      light
+                      >
+                        <v-card-title class="pa-2 grey--text">
+                          <h5>Друзья:</h5>
+                        </v-card-title>
+                        <div class="ma-2" v-for="friend in task.friends" :key="friend">
+                        {{friend.friends}}
+                          <v-divider></v-divider>
+                        </div>
+                      </v-card>
                     </v-col>
+
+            
+                    
                     <v-col>
-                      <div class="caption grey--text">Друзья:</div>
-                      <div v-for="friend in task.friends" :key="friend">·{{friend.friends}}</div>
+                      <v-card
+                      flat
+                      class="pa-2"
+                      color="#E9E9E9"
+                      light
+                      >
+                        <v-card-title class="pa-2 grey--text">
+                          <h5>Посты:</h5>
+                        </v-card-title>
+                        <div class="ma-2" v-for="post in task.posts" :key="post">
+                          {{post.posts}}
+                          <v-divider></v-divider>
+                        </div>
+                      </v-card>
                     </v-col>
+
                     <v-col>
-                      <div class="caption grey--text">Посты:</div>
-                      <div v-for="post in task.posts" :key="post">·{{post.posts}}</div>
+                      <v-card
+                      flat
+                      class="pa-2"
+                      color="#E9E9E9"
+                      light
+                      >
+                        <v-card-title class="pa-2 grey--text">
+                          <h5>Комментарии:</h5>
+                        </v-card-title>
+                        <div class="ma-2" v-for="comment in task.comments" :key="comment">
+                        {{comment.comments}}
+                          <v-divider></v-divider>
+                        </div>
+                      </v-card>
                     </v-col>
+
                     <v-col>
-                      <div class="caption grey--text">Комментарии:</div>
-                      <div v-for="comment in task.comments" :key="comment">·{{comment.comments}}</div>
-                    </v-col>
-                    <v-col>
-                      <div class="caption grey--text">Геолокации:</div>
-                      <div v-for="locate in task.geolocation" :key="locate">·{{locate.location}}</div>
+                      <v-card
+                      flat
+                      class="pa-2"
+                      color="#E9E9E9"
+                      light
+                      >
+                        <v-card-title class="pa-2 grey--text">
+                          <h5>Геолокации:</h5>
+                        </v-card-title>
+                        <div class="ma-2" v-for="locate in task.geolocation" :key="locate">
+                        {{locate.location}}
+                          <v-divider></v-divider>
+                        </div>
+                      </v-card>
                     </v-col>
                   </v-layout>
                 </v-card-text>
@@ -104,10 +164,25 @@
             </v-expansion-panel-content>
           </v-expansion-panel>        
         </v-expansion-panels>
+        <div>
+          <v-btn
+          v-if="this.$store.getters.getState"
+          text 
+          outlined 
+          class="ma-3 text-center"
+          @click="exportExcel"
+          >
+            <v-icon left>
+              mdi-apple-keyboard-caps
+            </v-icon>
+          Экспортировать
+        </v-btn>
+        </div>
+        
 
 
 
-        <v-divider></v-divider>
+
     
     </v-container>
   </div>
@@ -115,11 +190,13 @@
 </template>
 
 <script>
+import { saveExcel } from '@progress/kendo-vue-excel-export';
 export default {
       data() {
           return {
               tasks: [],
-              parseicon: false
+              parseicon: false,
+              count: 0
           }
       },
       created(){
@@ -141,15 +218,35 @@ export default {
         }
       },
       methods: {
-    //   sortBy(prop){
-    //   this.infouser.sort((a,b) => a[prop] < b[prop] ? -1 : 1);
-    // }
-    theOneFunc(){
-    this.parseicon = false
-  }
+      sortBy(prop){
+        if (this.count === 0){
+          this.tasks.sort((a,b) => a[prop] < b[prop] ? -1 : 1);
+          this.count = 1
+        }
+        else{
+          this.tasks.sort((a,b) => a[prop] > b[prop] ? -1 : 1);
+          this.count = 0
+        }
+      },
+      theOneFunc(){
+      this.parseicon = false
+      },
+      exportExcel () {
+        console.log(this.tasks[0])
+            saveExcel({
+                data: this.tasks,
+                fileName: "Users.xlsx",
+                columns: [
+                  { field: 'name', title: 'Имя'},
+                  { field: 'user_id', title: 'Идентификатор'},
+                  { field: 'online_status',  title: 'Был в сети'},
+                  { field: 'photo',  title: 'Фото'},
+                  { field: 'status',  title: 'Статус'},
+                  { field: 'town',  title: 'Город'},
+                  // { field: 'friends',  title: 'Друзья'},
+              ]
+            });
+        },
 },
-      
-      
-
 }
 </script>
