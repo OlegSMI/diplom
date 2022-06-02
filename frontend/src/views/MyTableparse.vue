@@ -27,7 +27,7 @@
         </v-tooltip>
 
         <template >
-          <v-btn small text depressed class="grey--text ml-5" @click="sortBy('groups')" v-on="on" >
+          <v-btn small text depressed class="grey--text ml-5" @click="isPhoto('photo')" v-on="on" >
             <v-icon left small>mdi-account</v-icon>
             <span class="caption text-lowercase">Только с фото</span>
           </v-btn>
@@ -55,8 +55,8 @@
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Фото: </div>
-                  <!-- <div>{{task.photo}}</div> -->
-                  <div>ФОТО</div>
+                  <v-img :src="task.photo" :alt="alt_name"></v-img>
+                  <!-- <div>ФОТО</div> -->
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Город:</div>
@@ -160,6 +160,12 @@
                     </v-col>
                   </v-layout>
                 </v-card-text>
+                <v-btn text outlined @click="$router.push({path: `analizuser/${task.user_id}`, params: task})">
+                  <v-icon left>
+                    mdi-chart-line
+                  </v-icon>
+                  Аналитика профиля
+                  </v-btn>
               </v-card>
             </v-expansion-panel-content>
           </v-expansion-panel>        
@@ -196,7 +202,8 @@ export default {
           return {
               tasks: [],
               parseicon: false,
-              count: 0
+              count: 0,
+              alt_name: ''
           }
       },
       created(){
@@ -247,6 +254,15 @@ export default {
               ]
             });
         },
+      isPhoto (item){
+        console.log(item)
+        if(item === null){
+          this.alt_name = 'Шляпа'
+        }
+      },
+      analizUser(item){
+        console.log(item)
+      }
 },
 }
 </script>

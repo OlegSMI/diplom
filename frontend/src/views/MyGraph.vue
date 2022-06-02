@@ -7,17 +7,18 @@
     dark
     max-width="900"
   >
-    <v-card-text>
-      <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <!-- <BarChart /> -->
-      </v-sheet>
-    </v-card-text>
-
-    <v-card-text>
+  <v-card-text>
       <div class="text-h4 font-weight-thin">
         Число представляющих интерес постов
       </div>
     </v-card-text>
+    <v-card-text>
+      <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
+        <BarChart class="absolute" />
+      </v-sheet>
+    </v-card-text>
+
+    
   </v-card>
 
   <v-card
@@ -158,9 +159,9 @@
 
 <script>
 
-// import BarChart from '../components/graphs/BarPostsComponent'
+import BarChart from '../components/graphs/BarPostsComponent'
 export default {
-  // components: { BarChart },
+  components: { BarChart },
   data: () => ({
     value: [
       423,

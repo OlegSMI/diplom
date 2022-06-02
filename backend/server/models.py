@@ -19,7 +19,8 @@ class InfoUser(models.Model):
                                 verbose_name='Статус'
                                 )
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', 
-                                verbose_name='Фото'
+                                verbose_name='Фото',
+                                blank=True
                                 )
     town = models.CharField(max_length=100, 
                             verbose_name='Город'

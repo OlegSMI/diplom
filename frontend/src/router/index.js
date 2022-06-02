@@ -4,6 +4,7 @@ import MyParsers from '../views/MyParsers.vue'
 import MyTableparse from '../views/MyTableparse.vue'
 import MyGraph from '../views/MyGraph.vue'
 import MyLocation from '../views/MyLocation.vue'
+import AnalizUser from '../views/AnalizUser.vue'
 // import LoginForm from '../components/login/LoginForm.vue'
 
 Vue.use(VueRouter)
@@ -40,6 +41,11 @@ const routes = [
   //   name: 'login',
   //   component: LoginForm
   // },
+  {
+    path: '/analizuser/:id',
+    name: 'analizuser',
+    component: AnalizUser
+  },
 ]
 
 const router = new VueRouter({

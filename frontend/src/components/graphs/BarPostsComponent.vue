@@ -1,66 +1,81 @@
 <template>
-  <Bar
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
+   <div>
+     <apexcharts height="500" type="bar" :options="chartOptions" :series="series"></apexcharts>
+   </div>
 </template>
 
 <script>
-import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import VueApexCharts from 'vue-apexcharts'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
-  name: 'BarChart',
-  components: { Bar },
-  props: {
-    chartId: {
-      type: String,
-      default: 'bar-chart'
+    components: {
+      apexcharts: VueApexCharts,
     },
-    datasetIdKey: {
-      type: String,
-      default: 'label'
-    },
-    width: {
-      type: Number,
-      default: 400
-    },
-    height: {
-      type: Number,
-      default: 400
-    },
-    cssClasses: {
-      default: '',
-      type: String
-    },
-    styles: {
-      type: Object,
-      default: () => {}
-    },
-    plugins: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  data() {
-    return {
-      chartData: {
-        labels: [ 'January', 'February', 'March' ],
-        datasets: [ { data: [40, 20, 12] } ]
-      },
-      chartOptions: {
-        responsive: true
+    data: function() {
+      return {
+        chartOptions: {
+          grid: {
+            show: false,  
+          },
+          // colors: 'white',
+          chart: {
+            id: 'vuechart-example',
+            toolbar: {
+            show: false,
+            tools: {
+              download: false,
+              selection: false,
+              zoom: false,
+              zoomin: false,
+              zoomout: false,
+              pan: false,
+              reset: false,
+            },
+          }
+          },
+          yaxis: {
+            show: false
+          },
+          xaxis: {
+            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+            floating: false,
+            labels: {
+              show: true,
+              rotateAlways: false,
+              style: {
+                  colors: 'white',
+                  fontSize: '20px',
+                  fontFamily: 'Arial',
+                  fontWeight: 400,
+                  cssClass: 'apexcharts-xaxis-label',
+              },
+              offsetX: 0,
+              offsetY: 5,
+            },  
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
+          },
+          tooltip: {
+            enabled: false
+          },
+  
+          
+        },
+        
+        series: [{
+          name: 'series-1',
+          data: [30, 40, 45, 50, 49, 60, 70, 91]
+        }],
+        
       }
-    }
-  }
-}
+    },
+};
 </script>
+
+
+
