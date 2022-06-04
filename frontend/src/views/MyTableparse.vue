@@ -160,7 +160,7 @@
                     </v-col>
                   </v-layout>
                 </v-card-text>
-                <v-btn text outlined @click="$router.push({path: `analizuser/${task.user_id}`, params: task})">
+                <v-btn text outlined @click="$router.push({path: `analizuser/${task.user_id}`, query:{task: task}})">
                   <v-icon left>
                     mdi-chart-line
                   </v-icon>

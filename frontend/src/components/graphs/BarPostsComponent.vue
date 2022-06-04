@@ -9,6 +9,29 @@ import VueApexCharts from 'vue-apexcharts'
 
 
 export default {
+  created(){
+        this.$store.dispatch('loadItems')
+        
+        if(this.$store.getters.getState===true){
+          if(this.$store.getters.getCount===0){
+            setTimeout(this.theOneFunc, 8 * 1000, 8);
+            this.parseicon = true;
+            this.tasks = this.$store.getters.getItems
+            this.$store.dispatch('setCount', 1)
+            console.log(this.$store.getters.getCount)
+          }
+          else{
+            this.parseicon = false;
+            this.tasks = this.$store.getters.getItems
+          }
+          
+        }
+      },
+    nethods: {
+      theOneFunc(){
+        this.parseicon = false
+      },
+    },
     components: {
       apexcharts: VueApexCharts,
     },

@@ -2,7 +2,7 @@
   <div class="about">
     <v-card flat class="ma-5 pa-5" >
       <h1>Чуханина:</h1>
-      <!-- {{task}} -->
+      {{infouser}}
     </v-card>
     
   </div>
@@ -10,9 +10,14 @@
 
 
 <script>
-// export default {
-//   props: {
-//     task
-//   }
-// }
+export default {
+   data() {
+          return {
+              infouser: [],
+          }
+      },
+  created(){
+    this.infouser = this.$route.params.task
+  }
+}
 </script>
