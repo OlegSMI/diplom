@@ -71,7 +71,7 @@
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <SparklineChart class='absolute'/>
+        <DonutChart class='absolute'/>
       </v-sheet>
     </v-card-text>
   </v-card>
@@ -103,8 +103,9 @@
 import BarChart from '../components/graphs/BarPostsComponent'
 import SparklineChart from '../components/graphs/SparklinePostsComponent'
 import RadarChart from '../components/graphs/RadialGraphPostComponent'
+import DonutChart from '../components/graphs/DonutPostsComponent'
 export default {
-  components: { BarChart, SparklineChart, RadarChart, },
+  components: { BarChart, SparklineChart, RadarChart, DonutChart},
   data: () => ({
     value: [
       423,
