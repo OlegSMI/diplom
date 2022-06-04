@@ -3,7 +3,7 @@
 
 <v-card
     class="mx-auto text-center my-5"
-    color="#A3AF9C"
+    color="grey"
     dark
     max-width="900"
   >
@@ -23,7 +23,7 @@
 
   <v-card
     class="mx-auto text-center my-5"
-    color="#A3AF9C"
+    color="grey"
     dark
     max-width="900"
   >
@@ -34,25 +34,7 @@
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <v-sparkline
-          class="py-6"
-          :value="value"
-          :labels="users"
-          color="rgba(255, 255, 255, .7)"
-          height="100"
-          padding="24"
-          stroke-linecap="round"
-          smooth
-          type="bar"
-          line-width="10"
-        >
-          <template v-slot:label="item">
-            User: {{ item.value }}
-          </template>
-          <template v-slot:key="item">
-            User: {{ item.value }}
-          </template>
-        </v-sparkline>
+        <SparklineChart class='absolute'/>
       </v-sheet>
     </v-card-text>
 
@@ -60,7 +42,7 @@
 
   <v-card
     class="mx-auto text-center my-5"
-    color="#A3AF9C"
+    color="grey"
     dark
     max-width="900"
   >
@@ -71,28 +53,14 @@
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <v-sparkline
-          class="py-6"
-          :value="value"
-          :labels="users"
-          color="rgba(255, 255, 255, .7)"
-          height="100"
-          padding="24"
-          stroke-linecap="round"
-          smooth
-        >
-          <template v-slot:label="item">
-            ${{ item.value }}
-          </template>
-        </v-sparkline>
-        
+        <RadarChart class='absolute'/>
       </v-sheet>
     </v-card-text>
   </v-card>
 
   <v-card
     class="mx-auto text-center my-5"
-    color="#A3AF9C"
+    color="grey"
     dark
     max-width="900"
   >
@@ -103,27 +71,14 @@
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <v-sparkline
-          class="py-6"
-          :value="value"
-          :labels="users"
-          color="rgba(255, 255, 255, .7)"
-          height="100"
-          padding="24"
-          stroke-linecap="round"
-          smooth
-        >
-          <template v-slot:label="item">
-            ${{ item.value }}
-          </template>
-        </v-sparkline>
+        <DonutChart class='absolute'/>
       </v-sheet>
     </v-card-text>
   </v-card>
 
   <v-card
     class="mx-auto text-center my-5"
-    color="#A3AF9C"
+    color="grey"
     dark
     max-width="900"
   >
@@ -134,21 +89,7 @@
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <v-sparkline
-          class="py-6"
-          :value="value"
-          :labels="users"
-          color="rgba(255, 255, 255, .7)"
-          height="100"
-          padding="24"
-          stroke-linecap="round"
-          smooth
-          
-        >
-          <template v-slot:label="item">
-            ${{ item.value }}
-          </template>
-        </v-sparkline>
+        <BarChart class='absolute'/>
       </v-sheet>
     </v-card-text>
   </v-card>
@@ -160,8 +101,11 @@
 <script>
 
 import BarChart from '../components/graphs/BarPostsComponent'
+import SparklineChart from '../components/graphs/SparklinePostsComponent'
+import RadarChart from '../components/graphs/RadialGraphPostComponent'
+import DonutChart from '../components/graphs/DonutPostsComponent'
 export default {
-  components: { BarChart },
+  components: { BarChart, SparklineChart, RadarChart, DonutChart},
   data: () => ({
     value: [
       423,

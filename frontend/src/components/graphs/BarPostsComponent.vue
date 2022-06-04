@@ -6,8 +6,6 @@
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
-
-
 export default {
   created(){
         this.$store.dispatch('loadItems')
@@ -41,20 +39,22 @@ export default {
           grid: {
             show: false,  
           },
-          // colors: 'white',
           chart: {
+            animations: {
+                enabled: true,
+                easing: 'easeinout',
+                speed: 800,
+                animateGradually: {
+                    enabled: false,
+                },
+                dynamicAnimation: {
+                    enabled: true,
+                    speed: 350
+                }
+            },
             id: 'vuechart-example',
             toolbar: {
             show: false,
-            tools: {
-              download: false,
-              selection: false,
-              zoom: false,
-              zoomin: false,
-              zoomout: false,
-              pan: false,
-              reset: false,
-            },
           }
           },
           yaxis: {
@@ -83,22 +83,55 @@ export default {
                 show: false,
             },
           },
+          fill: {
+          colors: ['#FFFFFF'],
+          opacity: 1,
+          type: 'solid',
+          },
           tooltip: {
             enabled: false
           },
-  
-          
+          dataLabels: {
+            enabled: true,
+            textAnchor: 'middle',
+            offsetX: 0,
+            offsetY: -30,
+            style: {
+                fontSize: '20px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontWeight: 'bold',
+                colors: undefined
+            },
+            background: {
+              enabled: true,
+              foreColor: '#fff',
+              opacity: 0,
+            },
+          },
+          plotOptions: {
+            bar: {
+                // borderRadius: 20,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+          },
         },
-        
         series: [{
           name: 'series-1',
           data: [30, 40, 45, 50, 49, 60, 70, 91]
         }],
         
+        
       }
     },
 };
 </script>
+
+<style>
+.apexcharts-bar-series.apexcharts-plot-series .apexcharts-series path {
+clip-path: inset(5% 5% 5% 0% round 20px);
+}</style>
 
 
 

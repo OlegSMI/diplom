@@ -160,12 +160,14 @@
                     </v-col>
                   </v-layout>
                 </v-card-text>
-                <v-btn text outlined @click="$router.push({path: `analizuser/${task.user_id}`, query:{task: task}})">
+                <router-link :to="{path:`/analizuser/$`, query: { id: task.num_user }}">
+                  <v-btn text outlined>
                   <v-icon left>
                     mdi-chart-line
                   </v-icon>
                   Аналитика профиля
                   </v-btn>
+                </router-link>
               </v-card>
             </v-expansion-panel-content>
           </v-expansion-panel>        
