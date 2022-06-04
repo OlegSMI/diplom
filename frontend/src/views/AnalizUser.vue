@@ -15,7 +15,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col md="8" class="">
+      <v-col md="8" >
         <v-card
         class="mx-auto text-center my-5"
         color="grey"
