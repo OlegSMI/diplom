@@ -7,39 +7,60 @@
 <script>
 import VueApexCharts from 'vue-apexcharts'
 export default {
-  created(){
-        this.$store.dispatch('loadItems')
-        
-        if(this.$store.getters.getState===true){
-          if(this.$store.getters.getCount===0){
-            setTimeout(this.theOneFunc, 8 * 1000, 8);
-            this.parseicon = true;
-            this.tasks = this.$store.getters.getItems
-            this.$store.dispatch('setCount', 1)
-            console.log(this.$store.getters.getCount)
-          }
-          else{
-            this.parseicon = false;
-            this.tasks = this.$store.getters.getItems
-          }
-          
-        }
-      },
-    nethods: {
-      theOneFunc(){
-        this.parseicon = false
-      },
-    },
     components: {
       apexcharts: VueApexCharts,
     },
+    props:{
+      posts:{
+        type: Array
+      }
+    },
+    created(){
+      for (var i in this.posts){
+        this.users.push(this.posts[i].name)
+        this.postsUser.push(this.posts[i].posts.length) 
+        console.log(this.users)
+        console.log(this.postsUser)
+      }
+    },
+    computed:{
+      getUser(){
+        for (var i in this.posts){
+          this.users.push(this.posts[i].name)
+        }
+        return this.users
+      },
+      getPosts(){
+        for (var i in this.posts){
+          this.postsUser.push(this.posts[i].posts.length) 
+        }
+        return this.postsUser
+      }
+    },
+    methods:{
+      changeData() {
+        VueApexCharts.exec('posts', "updateOptions", {
+          xaxis: {
+            categories: this.getUser
+          }
+        });
+        VueApexCharts.exec('posts', "updateSeries", [
+          {
+            data: this.getPosts
+          }
+        ]);
+      }
+    },
     data: function() {
       return {
+        users: [],
+        postsUser: [],
         chartOptions: {
           grid: {
             show: false,  
           },
           chart: {
+            id: 'posts',
             animations: {
                 enabled: true,
                 easing: 'easeinout',
@@ -52,7 +73,6 @@ export default {
                     speed: 350
                 }
             },
-            id: 'vuechart-example',
             toolbar: {
             show: false,
           }
@@ -61,7 +81,7 @@ export default {
             show: false
           },
           xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+            categories: [],
             floating: false,
             labels: {
               show: true,
@@ -119,13 +139,15 @@ export default {
         },
         series: [{
           name: 'series-1',
-          data: [30, 40, 45, 50, 49, 60, 70, 91]
+          data: []
         }],
         
         
       }
     },
 };
+
+
 </script>
 
 <style>

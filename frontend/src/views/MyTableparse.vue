@@ -160,7 +160,7 @@
                     </v-col>
                   </v-layout>
                 </v-card-text>
-                <router-link :to="{path:`/analizuser/$`, query: { id: task.num_user }}">
+                <router-link :to="{path:`/analizuser/${task.num_user}`, query: { num: task.num_user }}">
                   <v-btn text outlined>
                   <v-icon left>
                     mdi-chart-line
@@ -259,7 +259,7 @@ export default {
       isPhoto (item){
         console.log(item)
         if(item === null){
-          this.alt_name = 'Шляпа'
+          this.alt_name = 'Без фото'
         }
       },
       analizUser(item){

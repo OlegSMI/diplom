@@ -4,7 +4,7 @@ from .models import InfoUser, Posts, UserGroup, Friends, Comments, Geolocation
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = ('id', 'posts')
+        fields = ('id', 'posts', 'timepost', 'weekday_post')
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,7 +19,7 @@ class FriendsSerializer(serializers.ModelSerializer):
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ('id', 'comments')
+        fields = ('id', 'comments', 'timecomment', 'weekday_comment')
 
 class GeolocationSerializer(serializers.ModelSerializer):
     class Meta:

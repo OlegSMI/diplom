@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 
@@ -90,6 +92,17 @@ class Posts(models.Model):
                             null=True, 
                             blank=True
                             )
+    timepost = models.TimeField(auto_now=False,
+                                auto_now_add=False,
+                                blank=True, 
+                                verbose_name='Время поста',
+                                default=datetime.time(16, 00)
+                                )
+    weekday_post = models.IntegerField(blank=True,
+                                    verbose_name='День недели поста',
+                                    )
+                                    
+
 
     def __str__(self):
         return self.posts
@@ -111,7 +124,17 @@ class Comments(models.Model):
                                 null=True, 
                                 blank=True
                                 )
+    timecomment = models.TimeField(auto_now=False,
+                                auto_now_add=False,
+                                blank=True,
+                                verbose_name='Время коммента',
+                                default=datetime.time(16, 00)
+                                )
+    weekday_comment = models.IntegerField(blank=True,
+                                        verbose_name='День недели коммента',
+                                        )
 
+                                        
     def __str__(self):
         return self.comments
 

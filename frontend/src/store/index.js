@@ -13,7 +13,6 @@ export default new Vuex.Store({
   },
   getters: {
     getItems(state) {
-      console.log(state.items)
       return state.items
     },
     getState(state){
@@ -22,6 +21,9 @@ export default new Vuex.Store({
     getCount(state){
       return state.count
     },
+    getTodoById: (state) => (id) => {
+      return state.items.find(item => item.num_user === id)
+    }
   },
   mutations: {
     updateItems(state, data) {

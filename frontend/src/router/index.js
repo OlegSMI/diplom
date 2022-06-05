@@ -44,7 +44,8 @@ const routes = [
   {
     path: '/analizuser/:id',
     name: 'analizuser',
-    component: AnalizUser
+    component: AnalizUser,
+    props: true
   },
 ]
 

@@ -1,6 +1,6 @@
 <template>
-    <div id="chart" class="pa-5">
-        <apexchart type="donut" height="500" :options="chartOptions" :series="series"></apexchart>
+    <div id="chart" class="ma-5">
+        <apexchart type="donut" height="400" :options="chartOptions" :series="series"></apexchart>
       </div>
 </template>
 

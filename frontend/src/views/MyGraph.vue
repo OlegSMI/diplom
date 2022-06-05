@@ -9,12 +9,12 @@
   >
   <v-card-text>
       <div class="text-h4 font-weight-thin">
-        Число представляющих интерес постов
+        Общее число постов всех пользователей
       </div>
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <BarChart class="absolute" />
+        <BarPostsChart :posts="posts" class="absolute" />
       </v-sheet>
     </v-card-text>
 
@@ -29,12 +29,12 @@
   >
     <v-card-text>
       <div class="text-h4 font-weight-thin">
-        Число представляющих интерес постов
+        Общее число комментариев всех пользователей
       </div>
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <SparklineChart class='absolute'/>
+        <BarCommentsChart :comments="comments" class="absolute" />
       </v-sheet>
     </v-card-text>
 
@@ -89,7 +89,7 @@
     </v-card-text>
     <v-card-text>
       <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <BarChart class='absolute'/>
+        <BarPostsChart class='absolute'/>
       </v-sheet>
     </v-card-text>
   </v-card>
@@ -100,31 +100,31 @@
 
 <script>
 
-import BarChart from '../components/graphs/BarPostsComponent'
-import SparklineChart from '../components/graphs/SparklinePostsComponent'
+import BarPostsChart from '../components/graphs/BarPostsComponent'
+import BarCommentsChart from '../components/graphs/BarCommentsComponent'
+// import SparklineChart from '../components/graphs/SparklinePostsComponent'
 import RadarChart from '../components/graphs/RadialGraphPostComponent'
 import DonutChart from '../components/graphs/DonutPostsComponent'
 export default {
-  components: { BarChart, SparklineChart, RadarChart, DonutChart},
-  data: () => ({
-    value: [
-      423,
-      446,
-      675,
-      510,
-      590,
-      610,
-      760,
-    ],
-    users: [
-      1,
-      3,
-      6,
-      9,
-      12,
-      2,
-      1111,
-    ],
-  }),
+  components: { BarPostsChart, BarCommentsChart, RadarChart, DonutChart},
+  data()  {
+    return {
+      persons: [],
+      posts: [],
+      comments: []
+    }
+  },
+  beforeCreate(){
+    this.$store.dispatch('loadItems')
+    
+  },
+  created(){
+    this.persons = this.$store.getters.getItems;
+    console.log(this.persons)
+    for(var i in this.persons){
+      this.posts.push({'name': this.persons[i].name, 'posts': this.persons[i].posts})
+      this.comments.push({'name': this.persons[i].name, 'comments': this.persons[i].comments})
+    }
+  },
 }
 </script>
