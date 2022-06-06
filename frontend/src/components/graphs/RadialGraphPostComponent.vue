@@ -1,6 +1,6 @@
 <template>
     <div id="chart">
-        <apexchart type="radar" height="300" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
       </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
        return {
            series: [{
             name: 'Series 1',
-            data: [80, 50, 30, 40, 100, 20],
+            data: [7, 21, 18, 2, 25, 5],
           }],
           chartOptions: {
             chart: {
@@ -28,14 +28,14 @@ export default {
             enabled: false,
         },
             xaxis: {
-              categories: ['January', 'February', 'March', 'April', 'May', 'June'],
+              categories: ['Посты', 'Число друзей', 'Комментарии', 'Фотографии', 'Число групп', 'Общая активность'],
               floating: false,
               labels: {
                 show: true,
                 rotateAlways: false,
                 style: {
-                    colors: ['#dfg534','d1dddd'],
-                    fontSize: '20px',
+                    colors: ['#dfg534','d1dddd','d1dddd','d1dddd','d1dddd','d1dddd'],
+                    fontSize: '12px',
                     fontFamily: 'Arial',
                     fontWeight: 400,
                     cssClass: 'apexcharts-xaxis-label',

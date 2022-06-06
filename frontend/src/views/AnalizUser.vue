@@ -14,7 +14,7 @@
           <v-col md="6">
             <v-card-text class="py-5 black--text">
               <span style="font-size: 26px;">
-                Имя: <br>{{person.name}}
+                {{person.name}}
               </span>
             </v-card-text>
             <v-card-text class="py-3 black--text">
@@ -39,6 +39,18 @@
         </v-row>
         <v-card-text class="black--text">
           Дополнительная информация:
+          <br>
+          <span>
+            Число комментариев: 18
+          </span>
+          <br>
+          <span>
+            Число постов: 7
+          </span>
+          <br>
+          <span>
+            Социальная сеть: facebook
+          </span>
         </v-card-text>
           
              
@@ -54,12 +66,9 @@
         >
           <v-card-text>
             <h2 class="black--text font-weight-thin ma-2">
-              Активность 
+              Недельная ктивность 
             </h2>
-            
-            <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
               <HeatChart :person="person" class='absolute'/>
-            </v-sheet>
           </v-card-text>
         </v-card>
       </v-col>
@@ -75,9 +84,10 @@
 
         >
           <v-card-text>
-            <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded >
-              <DonutChart class="donut"/>
-            </v-sheet>
+            <h2 class="black--text font-weight-thin ma-2">
+              Сравнение с другими пользователями
+            </h2>
+              <RadarChart class="donut"/>
           </v-card-text>
         </v-card>
       </v-col>
@@ -90,40 +100,10 @@
         max-width="900"
         >
           <v-card-text>
-            <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
+              <h2 class="black--text font-weight-thin ma-2">
+                Годовая активность
+              </h2>
               <BestChart class='absolute'/>
-            </v-sheet>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col md="5" >
-        <v-card 
-        class="ma-5 text-center"
-        color="#4282D3"
-        dark
-        flat
-        max-width="900"
-        >
-          <v-card-text>
-            <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-              <RadarChart class='absolute'/>
-            </v-sheet>
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col md="7" >
-        <v-card
-        class="mx-auto text-center my-5"
-        color="#4282D3"
-        dark
-        max-width="900"
-        >
-          <v-card-text>
-            <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-              <SparklineChart class='absolute'/>
-            </v-sheet>
           </v-card-text>
         </v-card>
       </v-col>
@@ -133,13 +113,11 @@
 
 
 <script>
-import SparklineChart from '../components/graphs/SparklinePostsComponent'
 import RadarChart from '../components/graphs/RadialGraphPostComponent'
-import DonutChart from '../components/graphs/DonutPostsComponent'
 import HeatChart from '../components/graphs/HeatMapComponent'
-import BestChart from '../components/graphs/TheBestGraph'
+import BestChart from '../components/graphs/TheBestGraphUser'
 export default {
-  components: { SparklineChart, RadarChart, DonutChart, HeatChart, BestChart},
+  components: {RadarChart, HeatChart, BestChart},
   data() {
     return {
       person: [],
