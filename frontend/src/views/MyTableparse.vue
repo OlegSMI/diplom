@@ -160,7 +160,7 @@
                     </v-col>
                   </v-layout>
                 </v-card-text>
-                <router-link :to="{path:`/analizuser/${task.num_user}`, query: { num: task.num_user }}">
+                <router-link style="text-decoration: none" :to="{path:`/analizuser/${task.num_user}`, query: { num: task.num_user }}">
                   <v-btn text outlined>
                   <v-icon left>
                     mdi-chart-line

@@ -1,6 +1,6 @@
 <template>
-    <div id="chart" class="ma-5">
-        <apexchart type="donut" height="400" :options="chartOptions" :series="series"></apexchart>
+    <div id="chart" class="pb-3">
+        <apexchart type="donut" height="300" :options="chartOptions" :series="series"></apexchart>
       </div>
 </template>
 
@@ -12,8 +12,9 @@ export default {
     },
     data: function(){
        return {
-           series: [44, 55, 41, 17, 15],
+            series: [44, 123, 17, 215],
             chartOptions: {
+                labels:['Группы (воен)', 'Группы (не воен)', 'Посты (воен)', 'Посты (не воен)'],
                 chart: {
                 type: 'donut',
                 },
@@ -27,7 +28,8 @@ export default {
                     position: 'bottom'
                     }
                 }
-                }]
+                }],
+                
           },
        }
     }

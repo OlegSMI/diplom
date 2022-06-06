@@ -1,98 +1,119 @@
 <template>
 <v-container>
-
-<v-card
-    class="mx-auto text-center my-5"
-    color="grey"
+<v-row>
+   <v-col md="6">
+    <v-card
+    class="text-center"
+    color="white"
     dark
+    flat
     max-width="900"
-  >
-  <v-card-text>
-      <div class="text-h4 font-weight-thin">
-        Общее число постов всех пользователей
-      </div>
-    </v-card-text>
-    <v-card-text>
-      <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <BarPostsChart :posts="posts" class="absolute" />
-      </v-sheet>
-    </v-card-text>
-
-    
-  </v-card>
-
-  <v-card
-    class="mx-auto text-center my-5"
-    color="grey"
+    >
+      <v-card-text>
+        <div class="text-h5 black--text">
+          Общее число постов выявленных пользователей
+        </div>
+      </v-card-text>
+      <v-card-text>
+        <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
+          <BarPostsChart :users="users" :postsUser="postsUser" class="absolute" />
+        </v-sheet>
+      </v-card-text>
+    </v-card>
+   </v-col>
+   <v-col md="6">
+     <v-card
+    class="text-center"
+    color="white"
     dark
+    flat
     max-width="900"
-  >
-    <v-card-text>
-      <div class="text-h4 font-weight-thin">
-        Общее число комментариев всех пользователей
-      </div>
-    </v-card-text>
-    <v-card-text>
-      <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <BarCommentsChart :comments="comments" class="absolute" />
-      </v-sheet>
-    </v-card-text>
-
-  </v-card>
-
-  <v-card
-    class="mx-auto text-center my-5"
-    color="grey"
+    >
+      <v-card-text>
+        <div class="text-h5 black--text">
+          Общее число комментариев выявленных пользователей
+        </div>
+      </v-card-text>
+      <v-card-text>
+        <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
+          <BarCommentsChart :users="users" :commentsUser="commentsUser" class="absolute" />
+        </v-sheet>
+      </v-card-text>
+    </v-card>
+   </v-col>
+</v-row>
+<v-row>
+  <v-col md="6">
+    <v-card
+    class="text-center"
+    color="white"
     dark
+    flat
     max-width="900"
-  >
-    <v-card-text>
-      <div class="text-h4 font-weight-thin">
-        Количество постов выявленных пользователей
-      </div>
-    </v-card-text>
-    <v-card-text>
-      <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <RadarChart class='absolute'/>
-      </v-sheet>
-    </v-card-text>
-  </v-card>
-
-  <v-card
-    class="mx-auto text-center my-5"
-    color="grey"
+    >
+      <v-card-text>
+        <div class="text-h5 black--text">
+          Время активности выявленных пользователей
+        </div>
+      </v-card-text>
+      <v-card-text>
+        <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
+          <SparklineChart class='absolute'/>
+        </v-sheet>
+      </v-card-text>
+    </v-card>
+  </v-col>
+  <v-col md="6">
+    <v-card
+    class="text-center"
+    color="white"
     dark
+    flat
     max-width="900"
-  >
-    <v-card-text>
-      <div class="text-h4 font-weight-thin">
-        Количество групп выявленных пользователей
-      </div>
-    </v-card-text>
-    <v-card-text>
-      <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <DonutChart class='absolute'/>
-      </v-sheet>
-    </v-card-text>
-  </v-card>
-
-  <v-card
-    class="mx-auto text-center my-5"
-    color="grey"
+    >
+      <v-card-text>
+        <div class="text-h5 black--text">
+          Группы и посты с военной тематикой 
+        </div>
+      </v-card-text>
+      <v-card-text>
+        <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
+          <DonutChart class='absolute'/>
+        </v-sheet>
+      </v-card-text>
+    </v-card>
+  </v-col>
+</v-row>
+<v-row>
+  <v-col md="12">
+    <v-card
+    class="text-center"
+    color="white"
     dark
-    max-width="900"
-  >
-    <v-card-text>
-      <div class="text-h4 font-weight-thin">
-        Количество друзей выявленных пользователей
-      </div>
-    </v-card-text>
-    <v-card-text>
-      <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-        <BarPostsChart class='absolute'/>
-      </v-sheet>
-    </v-card-text>
-  </v-card>
+    flat
+    >
+      <v-card-text>
+        <div class="text-h5 black--text">
+          Наибольшая активность выявленных пользователей по месяцам
+        </div>
+      </v-card-text>
+      <v-card-text>
+        <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
+          <TheBestGraph class='absolute'/>
+        </v-sheet>
+      </v-card-text>
+    </v-card>
+  </v-col>
+</v-row>
+  
+
+  
+
+  
+
+  
+
+  
 </v-container>
   
   
@@ -102,16 +123,20 @@
 
 import BarPostsChart from '../components/graphs/BarPostsComponent'
 import BarCommentsChart from '../components/graphs/BarCommentsComponent'
-// import SparklineChart from '../components/graphs/SparklinePostsComponent'
-import RadarChart from '../components/graphs/RadialGraphPostComponent'
+import SparklineChart from '../components/graphs/SparklinePostsComponent'
+// import RadarChart from '../components/graphs/RadialGraphPostComponent'
 import DonutChart from '../components/graphs/DonutPostsComponent'
+import TheBestGraph from '@/components/graphs/TheBestGraph.vue'
 export default {
-  components: { BarPostsChart, BarCommentsChart, RadarChart, DonutChart},
+  components: { BarPostsChart, BarCommentsChart, DonutChart, SparklineChart, TheBestGraph },
   data()  {
     return {
       persons: [],
       posts: [],
-      comments: []
+      comments: [],
+      users: [],
+      postsUser: [],
+      commentsUser: []
     }
   },
   beforeCreate(){
@@ -120,10 +145,26 @@ export default {
   },
   created(){
     this.persons = this.$store.getters.getItems;
-    console.log(this.persons)
     for(var i in this.persons){
       this.posts.push({'name': this.persons[i].name, 'posts': this.persons[i].posts})
       this.comments.push({'name': this.persons[i].name, 'comments': this.persons[i].comments})
+    }
+    for (var j in this.posts){
+      this.users.push(this.posts[j].name)
+      if(this.posts[j].posts.length>0){
+        this.postsUser.push(this.posts[j].posts.length) 
+      }
+      else{
+        this.postsUser.push(0)
+      }
+    }
+    for (var k in this.comments){
+      if(this.comments[k].comments.length>0){
+        this.commentsUser.push(this.comments[k].comments.length)
+      }
+      else{
+        this.commentsUser.push(0)
+      }
     }
   },
 }

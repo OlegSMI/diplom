@@ -1,6 +1,6 @@
 <template>
-  <div class="example ma-5">
-    <apexchart height="400" type="area" :options="chartOptions" :series="series"></apexchart>
+  <div class="example">
+    <apexchart height="300" type="area" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
@@ -24,20 +24,20 @@ export default {
             show: false
         },
         xaxis: {
-            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            categories: ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
             floating: false,
             labels: {
               show: true,
               rotateAlways: false,
               style: {
-                  colors: 'white',
-                  fontSize: '20px',
+                  colors: 'black',
+                  fontSize: '12px',
                   fontFamily: 'Arial',
                   fontWeight: 400,
                   cssClass: 'apexcharts-xaxis-label',
               },
-              offsetX: 0,
-              offsetY: 5,
+              offsetX: 2,
+              offsetY: 0,
             },  
             axisBorder: {
                 show: false,
@@ -47,10 +47,44 @@ export default {
             },
         },
         tooltip: {
-            enabled: false,
-        },
+          enabled: true,
+          enabledOnSeries: undefined,
+          shared: true,
+          followCursor: false,
+          intersect: false,
+          inverseOrder: false,
+          custom: undefined,
+          fillSeriesColor: false,
+          theme: false,
+          style: {
+            fontSize: '12px',
+            fontFamily: undefined
+          },
+          onDatasetHover: {
+              highlightDataSeries: false,
+          },
+          x: {
+              show: false,
+          },
+          y: {
+              show: true
+          },
+          z: {
+              formatter: undefined,
+              title: 'Size: '
+          },
+          marker: {
+              show: true,
+          },
+          fixed: {
+              enabled: false,
+              position: 'topRight',
+              offsetX: 0,
+              offsetY: 0,
+          },
+      },
         fill: {
-          colors: ['#FFFFFF'],
+          colors: ['#1E90FF'],
           gradient: {
             shade: 'dark',
             type: "vertical",
@@ -59,7 +93,6 @@ export default {
             inverseColors: false,
             opacityFrom: 1,
             opacityTo: 1,
-            // stops: [0,10,20,30,40,50,60,70,80,90,100],
             colorStops: []
         },
         },
@@ -73,9 +106,9 @@ export default {
         },
       },
       series: [{
-          name: 'series1',
-          color: '#FFFFFF',
-          data: [31, 40, 28, 51, 42, 109, 100]
+          name: '',
+          color: '#1E90FF',
+          data: [3, 6, 3, 2, 5, 6, 2, 4, 2, 1, 7, 2]
       }],
     }
   },

@@ -8,7 +8,7 @@
         dark
         flat
         max-width="900"
-        height="487"
+        height="485"
         >
         <v-row>
           <v-col md="6">
@@ -31,7 +31,7 @@
           <v-col md="6">
             <v-card-text>
             <v-avatar
-            size="200">
+            size="180">
               <v-img :src="person.photo"></v-img>
             </v-avatar>
           </v-card-text>
@@ -46,13 +46,17 @@
       </v-col>
       <v-col md="7" >
         <v-card
-        class="mx-auto text-center my-5"
+        class="mx-auto text-center mt-5"
         color="white"
         dark
         flat
         max-width="900"
         >
           <v-card-text>
+            <h2 class="black--text font-weight-thin ma-2">
+              Активность 
+            </h2>
+            
             <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
               <HeatChart :person="person" class='absolute'/>
             </v-sheet>
@@ -68,10 +72,10 @@
         dark
         flat
         max-width="900"
-        height="487"
+
         >
           <v-card-text>
-            <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded height="415">
+            <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded >
               <DonutChart class="donut"/>
             </v-sheet>
           </v-card-text>
@@ -87,7 +91,7 @@
         >
           <v-card-text>
             <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-              <SparklineChart class='absolute'/>
+              <BestChart class='absolute'/>
             </v-sheet>
           </v-card-text>
         </v-card>
@@ -133,11 +137,13 @@ import SparklineChart from '../components/graphs/SparklinePostsComponent'
 import RadarChart from '../components/graphs/RadialGraphPostComponent'
 import DonutChart from '../components/graphs/DonutPostsComponent'
 import HeatChart from '../components/graphs/HeatMapComponent'
+import BestChart from '../components/graphs/TheBestGraph'
 export default {
-  components: { SparklineChart, RadarChart, DonutChart, HeatChart },
+  components: { SparklineChart, RadarChart, DonutChart, HeatChart, BestChart},
   data() {
     return {
       person: [],
+      times: [],
     }
   },
   created(){
@@ -145,9 +151,8 @@ export default {
   },
   computed: {
     countFriends: function() {
-      return Object.key(this.person.friends).length
-    }
-    
+      return (this.person.friends).length
+    },
   }
 }
 </script>

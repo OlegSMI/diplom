@@ -1,23 +1,21 @@
 <template>
    <div>
-     <apexcharts height="500" type="bar" :options="chartOptions" :series="series"></apexcharts>
+     <apexcharts height="300" type="bar" :options="chartOptions" :series="series"></apexcharts>
    </div>
 </template>
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
 export default {
-    nethods: {
-      theOneFunc(){
-        this.parseicon = false
-      },
-    },
     components: {
       apexcharts: VueApexCharts,
     },
     props:{
-      comments: {
-          type: Array
+      users:{
+        type: Array
+      },
+      commentsUser:{
+        type: Array
       }
     },
     data: function() {
@@ -48,13 +46,13 @@ export default {
             show: false
           },
           xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+            categories: this.users,
             floating: false,
             labels: {
               show: true,
               rotateAlways: false,
               style: {
-                  colors: 'white',
+                  colors: 'black',
                   fontSize: '20px',
                   fontFamily: 'Arial',
                   fontWeight: 400,
@@ -71,7 +69,7 @@ export default {
             },
           },
           fill: {
-          colors: ['#FFFFFF'],
+          colors: ['#1E90FF'],
           opacity: 1,
           type: 'solid',
           },
@@ -91,7 +89,7 @@ export default {
             },
             background: {
               enabled: true,
-              foreColor: '#fff',
+              foreColor: 'black',
               opacity: 0,
             },
           },
@@ -106,7 +104,7 @@ export default {
         },
         series: [{
           name: 'series-1',
-          data: [30, 40, 45, 50, 49, 60, 70, 91]
+          data: this.commentsUser
         }],
         
         

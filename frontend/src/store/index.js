@@ -9,10 +9,12 @@ export default new Vuex.Store({
     items: [],
     switch_check: false,
     count: 0,
-    user_id: ''
+    user_id: '',
+    notes: ''
   },
   getters: {
     getItems(state) {
+      console.log(state.items)
       return state.items
     },
     getState(state){
@@ -23,6 +25,9 @@ export default new Vuex.Store({
     },
     getTodoById: (state) => (id) => {
       return state.items.find(item => item.num_user === id)
+    },
+    getNotes(state){
+      return state.notes
     }
   },
   mutations: {
@@ -35,6 +40,9 @@ export default new Vuex.Store({
     setCount(state, num){
       state.count = num
     },
+    setNote(state, note){
+      state.notes = note
+    }
   },
   actions: {
     loadItems({commit}) {
@@ -42,6 +50,7 @@ export default new Vuex.Store({
       .then(res => {
         commit('updateItems', res.data)
       })
+      
     },
     setState(context, value) {
       context.commit('setState', value);
@@ -49,5 +58,8 @@ export default new Vuex.Store({
     setCount(context, num){ 
       context.commit('setCount', num);
     },
+    setNote(context, note){
+      context.commit('setCount', note);
+    }
   }
 })

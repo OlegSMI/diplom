@@ -1,6 +1,6 @@
 <template>
    <div>
-     <apexcharts height="500" type="bar" :options="chartOptions" :series="series"></apexcharts>
+     <apexcharts height="300" type="bar" :options="chartOptions" :series="series"></apexcharts>
    </div>
 </template>
 
@@ -11,50 +11,16 @@ export default {
       apexcharts: VueApexCharts,
     },
     props:{
-      posts:{
+      users:{
+        type: Array
+      },
+      postsUser:{
         type: Array
       }
     },
-    created(){
-      for (var i in this.posts){
-        this.users.push(this.posts[i].name)
-        this.postsUser.push(this.posts[i].posts.length) 
-        console.log(this.users)
-        console.log(this.postsUser)
-      }
-    },
-    computed:{
-      getUser(){
-        for (var i in this.posts){
-          this.users.push(this.posts[i].name)
-        }
-        return this.users
-      },
-      getPosts(){
-        for (var i in this.posts){
-          this.postsUser.push(this.posts[i].posts.length) 
-        }
-        return this.postsUser
-      }
-    },
-    methods:{
-      changeData() {
-        VueApexCharts.exec('posts', "updateOptions", {
-          xaxis: {
-            categories: this.getUser
-          }
-        });
-        VueApexCharts.exec('posts', "updateSeries", [
-          {
-            data: this.getPosts
-          }
-        ]);
-      }
-    },
-    data: function() {
+
+      data: function() {
       return {
-        users: [],
-        postsUser: [],
         chartOptions: {
           grid: {
             show: false,  
@@ -81,13 +47,13 @@ export default {
             show: false
           },
           xaxis: {
-            categories: [],
+            categories: this.users,
             floating: false,
             labels: {
               show: true,
               rotateAlways: false,
               style: {
-                  colors: 'white',
+                  colors: 'black',
                   fontSize: '20px',
                   fontFamily: 'Arial',
                   fontWeight: 400,
@@ -104,7 +70,7 @@ export default {
             },
           },
           fill: {
-          colors: ['#FFFFFF'],
+          colors: ['#1E90FF'],
           opacity: 1,
           type: 'solid',
           },
@@ -124,7 +90,7 @@ export default {
             },
             background: {
               enabled: true,
-              foreColor: '#fff',
+              foreColor: 'black',
               opacity: 0,
             },
           },
@@ -139,7 +105,7 @@ export default {
         },
         series: [{
           name: 'series-1',
-          data: []
+          data: this.postsUser
         }],
         
         

@@ -1,6 +1,5 @@
 <template>
-    <div id="chart" class="ma-5">
-      {{person.posts}}
+    <div id="chart" >
         <apexchart type="heatmap" height="400" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
@@ -21,31 +20,52 @@ export default {
        return {
           series: [{
             name: 'Пн',
-            data: this.generateData(12, 1)
+            data: this.generateData(12, {
+              min: 0,
+              max: 1
+            })
           },
           {
             name: 'Вт',
-            data: this.generateData(12, 2)
+            data: this.generateData(12, {
+              min: 0,
+              max: 4
+            })
           },
           {
             name: 'Ср',
-            data: this.generateData(12, 3)
+            data: this.generateData(12, {
+              min: 0,
+              max: 2
+            })
           },
           {
             name: 'Чт',
-            data: this.generateData(12, 4)
+            data: this.generateData(12, {
+              min: 0,
+              max: 3
+            })
           },
           {
             name: 'Пт',
-            data: this.generateData(12, 5)
+            data: this.generateData(12, {
+              min: 0,
+              max: 1
+            })
           },
           {
             name: 'Сб',
-            data: this.generateData(12, 6)
+            data: this.generateData(12, {
+              min: 0,
+              max: 2
+            })
           },
           {
             name: 'Вс',
-            data: this.generateData(12, 7)
+            data: this.generateData(12, {
+              min: 0,
+              max: 4
+            })
           },
           ],
           chartOptions: {
@@ -57,10 +77,11 @@ export default {
               },
             },
             dataLabels: {
-              enabled: false
+              enabled: true
             },
             colors: ["#008FFB"],
             xaxis: {
+            // type: 'datetime',
             categories: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
             floating: false,
             labels: {
@@ -122,6 +143,20 @@ export default {
     //   }
     //   return series;
     // }
+    generateData(count, yrange) {
+      var i = 0;
+      var series = [];
+      while (i < count) {
+        var x = (i + 1).toString();
+        var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+        series.push({
+          x: x,
+          y: y
+        });
+        i++;
+      }
+      return series;
+    }
     }
 }
 </script>

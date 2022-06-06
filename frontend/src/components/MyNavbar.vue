@@ -26,6 +26,7 @@
             <v-list-item-title class="white--text ml-5">{{link.text}}</v-list-item-title>
           </v-list-item>
       </v-list>
+      {{notes}}
     </v-navigation-drawer>
   </nav>
      
@@ -39,6 +40,7 @@ import Popup from './MyPopup'
     },
     data: () => {
       return {
+        notes: [],
         drawer:false,
         links: [
           { icon: 'mdi-account-search', text: 'Парсинг', route: '/'},
@@ -50,6 +52,9 @@ import Popup from './MyPopup'
         ]
 
       }
-    } 
+    },
+    created(){
+      this.notes = this.$store.getters.getNotes
+    }
   }
 </script>

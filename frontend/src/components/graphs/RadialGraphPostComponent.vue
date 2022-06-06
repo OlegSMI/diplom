@@ -1,6 +1,6 @@
 <template>
-    <div id="chart" class="ma-5">
-        <apexchart type="radar" height="400" :options="chartOptions" :series="series"></apexchart>
+    <div id="chart">
+        <apexchart type="radar" height="300" :options="chartOptions" :series="series"></apexchart>
       </div>
 </template>
 
@@ -34,14 +34,14 @@ export default {
                 show: true,
                 rotateAlways: false,
                 style: {
-                    colors: 'white',
+                    colors: ['#dfg534','d1dddd'],
                     fontSize: '20px',
                     fontFamily: 'Arial',
                     fontWeight: 400,
                     cssClass: 'apexcharts-xaxis-label',
                 },
                 offsetX: 0,
-                offsetY: 5,
+                offsetY: 0,
               },  
               axisBorder: {
                   show: false,
@@ -50,6 +50,9 @@ export default {
                   show: false,
               },
             },
+            fill: {
+          colors: ['#1E90FF'],
+          }
             
           },
        }
