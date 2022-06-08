@@ -11,6 +11,11 @@ import BarGraph from "../node_modules/vue-svg-charts/src/components/bar"
 Vue.config.productionTip = false
 
 // Vue.prototype.$http = axios
+// const token = localStorage.getItem('token')
+// if (token) {
+//   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+// }
+
 // axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 new Vue({
