@@ -14,7 +14,6 @@ export default new Vuex.Store({
   },
   getters: {
     getItems(state) {
-      console.log(state.items)
       return state.items
     },
     getState(state){

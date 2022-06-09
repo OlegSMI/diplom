@@ -6,8 +6,6 @@ import AnalizUser from '../views/AnalizUser.vue'
 import MyDiagram from '../views/MyDiagram.vue'
 // import LoginForm from '../components/login/LoginForm.vue'
 
-// import {MyParsers, MyTableparse, MyGraph, MyDiagram, MyLocation, AnalizUser} from '../views'
-
 const routes = [
     {
       path: '/',
