@@ -4,13 +4,16 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-// import MyHome from './views/MyHome'
 
 // import axios from 'axios'
 Vue.config.productionTip = false
 
 // Vue.prototype.$http = axios
 // axios.defaults.baseURL = 'http://127.0.0.1:8000'
+// const token = localStorage.getItem('token')
+// if (token) {
+//   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+// }
 
 new Vue({
   router,
@@ -18,6 +21,3 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
-
-
-

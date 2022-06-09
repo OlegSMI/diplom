@@ -48,7 +48,7 @@ import Popup from './MyPopup'
           { icon: 'mdi-account-arrow-up', text: 'Список выявленных', route: '/tableparse'},
           { icon: 'mdi-book-open-outline', text: 'Описание', route: '/about'},
           { icon: 'mdi-map-outline', text: 'Геолокация', route: '/location'},
-          { icon: 'mdi-chart-box-outline', text: 'Диаграмма', route: '/diagrams'},
+          { icon: 'mdi-chart-box-outline', text: 'Диаграмма', route: '/locationdiagram'},
         ]
 
       }

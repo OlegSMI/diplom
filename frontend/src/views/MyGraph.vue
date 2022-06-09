@@ -53,7 +53,7 @@
     >
       <v-card-text>
         <div class="text-h5 black--text">
-          Время активности выявленных пользователей
+          Наибольшая активность пользователей
         </div>
       </v-card-text>
       <v-card-text>
@@ -105,6 +105,11 @@
     </v-card>
   </v-col>
 </v-row>
+<v-row>
+      <v-card>
+        <TheBestGraph class='absolute'/>
+      </v-card>
+    </v-row>
   
 
   

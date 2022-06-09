@@ -1,6 +1,6 @@
 <template>
    <div>
-     <apexcharts height="300" type="bar" :options="chartOptions" :series="series"></apexcharts>
+     <apexcharts height="400" type="bar" :options="chartOptions" :series="series"></apexcharts>
    </div>
 </template>
 
@@ -51,10 +51,11 @@ export default {
             floating: false,
             labels: {
               show: true,
-              rotateAlways: false,
+              rotate: -90,
+              rotateAlways: true,
               style: {
                   colors: 'black',
-                  fontSize: '20px',
+                  fontSize: '12px',
                   fontFamily: 'Arial',
                   fontWeight: 400,
                   cssClass: 'apexcharts-xaxis-label',
@@ -105,7 +106,8 @@ export default {
         },
         series: [{
           name: 'series-1',
-          data: this.postsUser
+          // data: this.postsUser
+          data: [7,9,4,7,3,4,2,7,9]
         }],
         
         

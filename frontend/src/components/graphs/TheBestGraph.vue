@@ -13,13 +13,13 @@ export default {
     data: function(){
        return {
            series: [{
-            name: 'Website Blog',
+            name: 'Выявленые пользователи',
             type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+            data: [4, 3, 6, 7, 5, 2, 2, 0, 0, 2, 1, 4]
           }, {
-            name: 'Social Media',
+            name: 'Выявленные действия',
             type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            data: [12, 5, 11, 22, 4, 5, 6, 0, 0, 2, 2, 6]
           }],
           chartOptions: {
             chart: {
@@ -36,17 +36,61 @@ export default {
               enabled: true,
               enabledOnSeries: [1]
             },
-            labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-            xaxis: {
-              type: 'datetime'
-            },
+            labels: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            // xaxis: {
+            //   type: 'datetime'
+            // },
             yaxis: [{
             
             }, {
               opposite: true,
-            }]
+            }],
+            tooltip: {
+                enabled: true,
+                enabledOnSeries: undefined,
+                shared: true,
+                followCursor: false,
+                intersect: false,
+                inverseOrder: false,
+                custom: undefined,
+                fillSeriesColor: false,
+                theme: true,
+                style: {
+                  fontSize: '12px',
+                  fontFamily: undefined
+                },
+                onDatasetHover: {
+                    highlightDataSeries: false,
+                },
+                x: {
+                    show: false,
+                },
+                y: {
+                    show: true
+                },
+                z: {
+                    formatter: undefined,
+                    title: 'Size: '
+                },
+                marker: {
+                    show: true,
+                },
+                fixed: {
+                    enabled: false,
+                    position: 'topRight',
+                    offsetX: 0,
+                    offsetY: 0,
+                },
+            },
           },
        }
     }
 }
 </script>
+
+<style>
+.apexcharts-tooltip {
+    background: #f3f3f3;
+    color: black;
+  }
+</style>

@@ -4,7 +4,7 @@
         <v-col md="4">
             <v-card class="ma-5" flat>
                 <v-card-title>
-                    Настройка:
+                    Данные:
                 </v-card-title>
                 <v-card-text>
                   <v-text-field
@@ -126,10 +126,10 @@ export default {
       default: () => { return 30.3089 }
       },
       latitude_2: {
-      default: () => { return '' }
+      default: () => { return 52.673 }
     },
       longitude_2:  {
-      default: () => { return '' }
+      default: () => { return 29.345 }
       },
     },
     components: {

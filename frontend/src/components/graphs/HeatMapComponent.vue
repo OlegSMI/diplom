@@ -29,21 +29,21 @@ export default {
             name: 'Вт',
             data: this.generateData(12, {
               min: 0,
-              max: 4
+              max: 1
             })
           },
           {
             name: 'Ср',
             data: this.generateData(12, {
               min: 0,
-              max: 2
+              max: 0
             })
           },
           {
             name: 'Чт',
             data: this.generateData(12, {
               min: 0,
-              max: 3
+              max: 0
             })
           },
           {
@@ -57,14 +57,14 @@ export default {
             name: 'Сб',
             data: this.generateData(12, {
               min: 0,
-              max: 2
+              max: 1
             })
           },
           {
             name: 'Вс',
             data: this.generateData(12, {
               min: 0,
-              max: 4
+              max: 0
             })
           },
           ],
