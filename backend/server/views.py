@@ -38,5 +38,20 @@ class GetUserInfoInSosialNetwork(APIView):
 class GetAllUserInfoInSosialNetwork(APIView):
     
     def get(self, request):
+        users = requests.get('http://127.0.0.1:8888/user/all_users/')
+        for user in users:
+            print(user['comments']['comment_text'])
+        # keywords = [
+        #         'war', 'agressor', 'tomorrow', 'intillegence', 'Ukraine', 
+        #             ]       
+        # for key in keywords:
+        #     if any([distance_hamming(user['comments']['comment_text'].lower(), key)<3 for user in users]):
+        #         return True
+        return Response(users.json())
 
-        
+    #     def distance_hamming(str1, str2):
+    # if len(str1) > len(str2):
+    #     str2 = str2 + (len(str1)-len(str2))*' '
+    # elif len(str2) > len(str1):
+    #     str1 = str1 + (len(str2)-len(str1))* ' '
+    # return sum(1 for (a, b) in zip(str1, str2) if a != b)
