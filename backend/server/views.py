@@ -35,8 +35,8 @@ class GetUserInfoInSosialNetwork(APIView):
         })
 
 
-class GetAllUserInfoInSosialNetwork(APIView):
+# class GetAllUserInfoInSosialNetwork(APIView):
     
-    def get(self, request):
+#     def get(self, request):
 
-        
+  
