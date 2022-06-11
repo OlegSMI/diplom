@@ -8,6 +8,8 @@ from rest_framework.views import APIView
 from .models import InfoUser
 from .serializers import InfoUserSerializer
 
+from .service_func.distance import distance_hamming
+
 class UserListView(ListCreateAPIView):
     queryset = InfoUser.objects.all()
     serializer_class = InfoUserSerializer
@@ -35,8 +37,37 @@ class GetUserInfoInSosialNetwork(APIView):
         })
 
 
-# class GetAllUserInfoInSosialNetwork(APIView):
+class GetAllUserInfoInSosialNetwork(APIView):
     
-#     def get(self, request):
+    def get(self, request):
+        users = requests.get('http://127.0.0.1:8888/user/all_users/')
+        keywords = [
+                    'war',
+                    'agressor',
+                    'tomorrow', 
+                    'intillegence', 
+                    'ukraine',
+                    'aef'
+                    ]   
+        for user in users.json():
+            for user_com in user['comments_group']:
+                for key in keywords:
+                    if any([distance_hamming(i.lower(), key)<3 for i in user_com['comment_text']]):
+                        print(user['id'], ' yes')
+                    else:
+                        print('no')
+            for user_post in user['posts']:
+                for key in keywords:
+                    if any([distance_hamming(i.lower(), key)<3 for i in user_post['post_text']]):
+                        print(user['id'], 'yes')
+                    else:
+                        print('no')
+            for user_com in user['comments']:
+                for key in keywords:
+                    if any([distance_hamming(i.lower(), key)<3 for i in user_com['comment_text']]):
+                        print(user['id'], 'yes')
+                    else:
+                        print('no')
+        return Response(users.json())
 
-  
+        
