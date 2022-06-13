@@ -58,7 +58,7 @@
       </v-card-text>
       <v-card-text>
         <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-          <SparklineChart class='absolute'/>
+          <SparklineChart :user_active="mass_data" class='absolute'/>
         </v-sheet>
       </v-card-text>
     </v-card>
@@ -99,17 +99,12 @@
       </v-card-text>
       <v-card-text>
         <v-sheet color="rgba(0, 0, 0, .12)" elevation="4" rounded>
-          <TheBestGraph class='absolute'/>
+          <TheBestGraph :content="count_content" :users="mass_data" class='absolute'/>
         </v-sheet>
       </v-card-text>
     </v-card>
   </v-col>
 </v-row>
-<v-row>
-      <v-card>
-        <TheBestGraph class='absolute'/>
-      </v-card>
-    </v-row>
   
 
   
@@ -141,7 +136,11 @@ export default {
       comments: [],
       users: [],
       postsUser: [],
-      commentsUser: []
+      commentsUser: [],
+      dates: new Object(),
+      dates2: new Object(),
+      mass_data: [],
+      count_content: []
     }
   },
   beforeCreate(){
@@ -151,11 +150,16 @@ export default {
   created(){
     this.persons = this.$store.getters.getItems;
     for(var i in this.persons){
-      this.posts.push({'name': this.persons[i].name, 'posts': this.persons[i].posts})
-      this.comments.push({'name': this.persons[i].name, 'comments': this.persons[i].comments})
+      this.posts.push({'name': this.persons[i].first_name +' '+ this.persons[i].last_name,
+                       'posts': this.persons[i].posts,
+                       })
+      this.comments.push({'name': this.persons[i].first_name + this.persons[i].last_name, 
+                          'comments': this.persons[i].comments,
+                          'comments_group': this.persons[i].comments_group
+                          })
     }
     for (var j in this.posts){
-      this.users.push(this.posts[j].name)
+      this.users.push(this.persons[i].first_name +' '+ this.persons[i].last_name)
       if(this.posts[j].posts.length>0){
         this.postsUser.push(this.posts[j].posts.length) 
       }
@@ -165,12 +169,81 @@ export default {
     }
     for (var k in this.comments){
       if(this.comments[k].comments.length>0){
-        this.commentsUser.push(this.comments[k].comments.length)
+        this.commentsUser.push(this.comments[k].comments.length+this.comments[k].comments_group.length)
+      }
+      else if(this.comments[k].comments_group.length>0){
+        this.commentsUser.push(this.comments[k].comments_group.length+ this.comments[k].comments_group.length)
       }
       else{
         this.commentsUser.push(0)
       }
     }
+
+
+    for (let i = 0; i < 24; i = i + 2){
+      this.dates[i] = new Set();
+      this.dates2[i] = [];
+    }
+
+
+    for (var z in this.posts){
+      for (var h in this.posts[z].posts){
+        for (let i = 0; i < 24; i = i + 2){
+          var timepost = Number(this.posts[z].posts[h].timepost.split(':')[0])
+          if (i <= timepost && timepost < i+2){
+            this.dates[i].add(this.posts[z].name)
+            this.dates2[i].push(1) 
+          }   
+        } 
+      } 
+    }
+
+
+    for (var u in this.comments){
+      for (var s in this.comments[u].comments){
+        for (let i = 0; i < 24; i = i + 2){
+          var timepost2 = Number(this.comments[u].comments[s].timecomment.split(':')[0])
+          if (i <= timepost2 && timepost2 < i+2){
+            this.dates[i].add(this.posts[z].name)
+            this.dates2[i].push(1) 
+          }   
+        } 
+      } 
+
+      for (var g in this.comments[u].comments_group){
+        for (let i = 0; i < 24; i = i + 2){
+          var timepost3 = Number(this.comments[u].comments_group[g].timecomment.split(':')[0])
+          if (i <= timepost3 && timepost3 < i+2){
+            this.dates[i].add(this.posts[z].name)
+            this.dates2[i].push(1) 
+          }   
+        } 
+      } 
+    }
+
+    for (i in this.dates){
+      if(this.dates[i].size===0){
+        this.mass_data.push(0)
+      }
+      else{
+        this.mass_data.push(this.dates[i].size)
+      }
+      
+    }
+
+    for (i in this.dates2){
+      if(this.dates2[i].length===0){
+        this.count_content.push(0)
+      }
+      else{
+        this.count_content.push(this.dates2[i].length)
+      }
+      
+    }
+
+
+    console.log(this.mass_data)
+    console.log(this.count_content)
   },
 }
 </script>

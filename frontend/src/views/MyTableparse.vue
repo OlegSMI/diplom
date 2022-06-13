@@ -43,19 +43,19 @@
               <v-layout wrap :class="`pa-3 gig ${task.num_user}`">
                 <v-col xs="2" md="2">
                   <div class="caption grey--text">Имя пользователя: </div>
-                  <div>{{task.name}}</div>
+                  <div>{{task.first_name}} {{task.last_name}}</div>
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
-                  <div class="caption grey--text">Был в сети: </div>
-                  <div>{{task.online_status}}</div>
+                  <div class="caption grey--text">Возраст: </div>
+                  <div>{{task.age}}</div>
                 </v-col>
-                <v-col xs="2" sm="4" md="2">
+                <!-- <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Статус: </div>
                   <div>{{task.status}}</div>
-                </v-col>
+                </v-col> -->
                 <v-col xs="2" sm="4" md="2">
                   <div class="caption grey--text">Фото: </div>
-                  <v-img :src="task.photo" :alt="alt_name"></v-img>
+                  <v-img :src="task.img" :alt="alt_name"></v-img>
                   <!-- <div>ФОТО</div> -->
                 </v-col>
                 <v-col xs="2" sm="4" md="2">
@@ -82,8 +82,8 @@
                         <v-card-title class="pa-2 grey--text">
                           <h5>Группы:</h5>
                         </v-card-title>
-                        <div class="ma-2" v-for="group in task.groups" :key="group">
-                          {{group.groups}}
+                        <div class="ma-2" v-for="group in task.all_groups" :key="group.id">
+                          {{group.group_name}}
                           <v-divider></v-divider>
                         </div>
                       </v-card>
@@ -99,8 +99,8 @@
                         <v-card-title class="pa-2 grey--text">
                           <h5>Друзья:</h5>
                         </v-card-title>
-                        <div class="ma-2" v-for="friend in task.friends" :key="friend">
-                        {{friend.friends}}
+                        <div class="ma-2" v-for="friend in task.friends_info" :key="friend">
+                        {{friend.first_name}} {{friend.last_name}}
                           <v-divider></v-divider>
                         </div>
                       </v-card>
@@ -119,7 +119,7 @@
                           <h5>Посты:</h5>
                         </v-card-title>
                         <div class="ma-2" v-for="post in task.posts" :key="post">
-                          {{post.posts}}
+                          {{post.post_text}}
                           <v-divider></v-divider>
                         </div>
                       </v-card>
@@ -133,10 +133,11 @@
                       light
                       >
                         <v-card-title class="pa-2 grey--text">
-                          <h5>Комментарии:</h5>
+                          <h5>Комментарии <br>
+                            в группах:</h5>
                         </v-card-title>
                         <div class="ma-2" v-for="comment in task.comments" :key="comment">
-                        {{comment.comments}}
+                        {{comment.comment_text}}
                           <v-divider></v-divider>
                         </div>
                       </v-card>
@@ -150,17 +151,18 @@
                       light
                       >
                         <v-card-title class="pa-2 grey--text">
-                          <h5>Геолокации:</h5>
+                          <h5>Комментарии <br>
+                            на страницах:</h5>
                         </v-card-title>
-                        <div class="ma-2" v-for="locate in task.geolocation" :key="locate">
-                        {{locate.location}}
+                        <div class="ma-2" v-for="comment_group in task.comments_group" :key="comment_group.id">
+                        {{comment_group.comment_text}}
                           <v-divider></v-divider>
                         </div>
                       </v-card>
                     </v-col>
                   </v-layout>
                 </v-card-text>
-                <router-link style="text-decoration: none" :to="{path:`/analizuser/${task.num_user}`, query: { num: task.num_user }}">
+                <router-link style="text-decoration: none" :to="{path:`/analizuser/${task.id}`, query: { num: task.id }}">
                   <v-btn text outlined>
                   <v-icon left>
                     mdi-chart-line
@@ -208,23 +210,23 @@ export default {
               alt_name: ''
           }
       },
-      created(){
-        this.$store.dispatch('loadItems')
+      mounted(){
+          this.$store.dispatch('loadItems')
+          if(this.$store.getters.getState===true){
+            if(this.$store.getters.getCount===0){
+              setTimeout(this.theOneFunc, 8 * 1000, 8);
+              this.parseicon = true;
+              this.tasks = this.$store.getters.getItems
+              this.$store.dispatch('setCount', 1)
+              console.log(this.$store.getters.getCount)
+            }
+            else{
+              this.parseicon = false;
+              this.tasks = this.$store.getters.getItems
+            }
+          }
+
         
-        if(this.$store.getters.getState===true){
-          if(this.$store.getters.getCount===0){
-            setTimeout(this.theOneFunc, 8 * 1000, 8);
-            this.parseicon = true;
-            this.tasks = this.$store.getters.getItems
-            this.$store.dispatch('setCount', 1)
-            console.log(this.$store.getters.getCount)
-          }
-          else{
-            this.parseicon = false;
-            this.tasks = this.$store.getters.getItems
-          }
-          
-        }
       },
       methods: {
       sortBy(prop){

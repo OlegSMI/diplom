@@ -7,10 +7,10 @@
         <span class="font-weight-light">МЕНЮ</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn depressed class="text-uppercase grey--text"> 
+      <!-- <v-btn depressed class="text-uppercase grey--text"> 
         <v-icon class="text-uppercase grey--text">mdi-logout-variant</v-icon>
         Выйти
-      </v-btn>
+      </v-btn> -->
 
     </v-app-bar>
 
@@ -48,7 +48,7 @@ import Popup from './MyPopup'
           { icon: 'mdi-account-arrow-up', text: 'Список выявленных', route: '/tableparse'},
           { icon: 'mdi-book-open-outline', text: 'Описание', route: '/about'},
           { icon: 'mdi-map-outline', text: 'Геолокация', route: '/location'},
-          { icon: 'mdi-chart-box-outline', text: 'Диаграмма', route: '/locationdiagram'},
+          // { icon: 'mdi-chart-box-outline', text: 'Диаграмма', route: '/locationdiagram'},
         ]
 
       }

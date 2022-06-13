@@ -32,8 +32,8 @@
           class="text-center ma-3"
           >
             <v-switch
-              v-model="switch_check1"
-              v-if="person.switches==switch_check1"
+              v-model="allcheck1"
+              v-if="person.switches==false"
               class="pa-3"
               disabled
               label="Парсер не работает"
@@ -41,7 +41,7 @@
             ></v-switch>
             
             <v-switch
-              v-model="switch_check2"
+              v-model="allcheck2"
               v-else
               class="pa-3"
               disabled
@@ -63,8 +63,8 @@ export default {
   data() {
     return {
       tasks: [''],
-      switch_check1: '',
-      switch_check2: '',
+      allcheck1: false,
+      allcheck2: true,
       team: [
         { id: 1, name: 'Парсер "ВКонтакте"', avatar:  'vk.png',  switches: false},
         { id: 2, name: 'Парсер "Фэйсбук"', avatar: 'Facebook.png', switches: false},
@@ -73,12 +73,6 @@ export default {
       ]
     }
   },
-
-  created(){
-    this.switch_check1 = this.$store.getters.getState
-    this.switch_check2 = !this.$store.getters.getState
-  },
-  
   methods: {
   getImgUrl(pic){
     return require('../assets/' + pic)

@@ -106,8 +106,8 @@ export default {
         },
         series: [{
           name: 'series-1',
-          // data: this.postsUser
-          data: [7,9,4,7,3,4,2,7,9]
+          data: this.postsUser
+          // data: [7,9,4,7,3,4,2,7,9]
         }],
         
         

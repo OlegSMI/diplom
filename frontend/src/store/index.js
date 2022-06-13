@@ -23,7 +23,7 @@ export default new Vuex.Store({
       return state.count
     },
     getTodoById: (state) => (id) => {
-      return state.items.find(item => item.num_user === id)
+      return state.items.find(item => item.id === id)
     },
     getNotes(state){
       return state.notes
@@ -45,7 +45,7 @@ export default new Vuex.Store({
   },
   actions: {
     loadItems({commit}) {
-      axios.get('http://127.0.0.1:8000/users')
+      axios.get('http://127.0.0.1:8000/all_users')
       .then(res => {
         commit('updateItems', res.data)
       })

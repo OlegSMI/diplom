@@ -10,16 +10,20 @@ export default {
     components: {
       apexchart: VueApexCharts,
     },
+    props:{
+      content: Array,
+      users: Array,
+    },
     data: function(){
        return {
            series: [{
             name: 'Выявленые пользователи',
             type: 'column',
-            data: [4, 3, 6, 7, 5, 2, 2, 0, 0, 2, 1, 4]
+            data: this.users
           }, {
             name: 'Выявленные действия',
             type: 'line',
-            data: [12, 5, 11, 22, 4, 5, 6, 0, 0, 2, 2, 6]
+            data: this.content
           }],
           chartOptions: {
             chart: {
@@ -36,7 +40,7 @@ export default {
               enabled: true,
               enabledOnSeries: [1]
             },
-            labels: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            labels: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
             // xaxis: {
             //   type: 'datetime'
             // },

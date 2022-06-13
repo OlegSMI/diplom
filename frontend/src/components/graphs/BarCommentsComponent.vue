@@ -105,8 +105,8 @@ export default {
         },
         series: [{
           name: 'series-1',
-          // data: this.commentsUser
-          data: [18,19,3,5,21,5,6,13,2]
+          data: this.commentsUser
+          // data: [18,19,3,5,21,5,6,13,2]
         }],
         
         

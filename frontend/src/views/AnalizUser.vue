@@ -14,12 +14,12 @@
           <v-col md="6">
             <v-card-text class="py-5 black--text">
               <span style="font-size: 26px;">
-                {{person.name}}
+                {{person.first_name}} {{person.last_name}}
               </span>
             </v-card-text>
             <v-card-text class="py-3 black--text">
               <span style="font-size: 20px;">
-                Статус: {{person.status}}
+                Возраст: {{person.age}}
               </span>
             </v-card-text>
             <v-card-text class="py-3 black--text">
@@ -32,7 +32,7 @@
             <v-card-text>
             <v-avatar
             size="180">
-              <v-img :src="person.photo"></v-img>
+              <v-img :src="person.img"></v-img>
             </v-avatar>
           </v-card-text>
           </v-col>
@@ -41,15 +41,15 @@
           Дополнительная информация:
           <br>
           <span>
-            Число комментариев: 18
+            Число комментариев: {{countComments}}
           </span>
           <br>
           <span>
-            Число постов: 7
+            Число постов: {{countPosts}}
           </span>
           <br>
           <span>
-            Социальная сеть: facebook
+            Социальная сеть: TestNet
           </span>
         </v-card-text>
           
@@ -126,11 +126,18 @@ export default {
   },
   created(){
     this.person = this.$store.getters.getTodoById(Number(this.$route.query.num))
+    console.log('fvffv', this.person)
   },
   computed: {
     countFriends: function() {
-      return (this.person.friends).length
+      return (this.person.friends_info).length
     },
+    countPosts: function() {
+      return (this.person.posts).length
+    },
+    countComments: function() {
+      return ((this.person.comments).length + (this.person.comments_group).length)
+    }
   }
 }
 </script>

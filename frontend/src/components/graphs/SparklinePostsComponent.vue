@@ -10,7 +10,10 @@ export default {
   name: 'AreaExample',
   components: {
       apexchart: VueApexCharts,
-    },
+  },
+  props:{
+    user_active: Array
+  },
   data: function() {
     return {
       chartOptions: {
@@ -27,6 +30,9 @@ export default {
             categories: ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
             floating: false,
             labels: {
+              datetimeFormatter: {
+                hour: 'HH:mm'
+              },
               show: true,
               rotateAlways: false,
               style: {
@@ -108,7 +114,7 @@ export default {
       series: [{
           name: '',
           color: '#1E90FF',
-          data: [3, 6, 3, 2, 5, 6, 2, 4, 2, 1, 7, 2]
+          data: this.user_active
       }],
     }
   },
