@@ -1,5 +1,5 @@
 <template>
-  <div ref="map-root"
+  <div ref="maproot"
        style="width: 100%; height: 100%">
   </div>
 </template>
@@ -62,15 +62,15 @@ export default {
             map: ''
         }
     },
-    watch: {
-        currPath: {
-            deep: true,
-            handler(newValue, oldValue){
-                console.log('ddvd', newValue);
-                console.log(oldValue);
-            }     
-    }
-    },
+    // watch: {
+    //     currPath: {
+    //         deep: true,
+    //         handler(newValue, oldValue){
+    //             console.log('ddvd', newValue);
+    //             console.log(oldValue);
+    //         }     
+    // }
+    // },
     mounted() {
         var forest = new TileLayer({
             source: new TileWMS({
@@ -89,14 +89,12 @@ export default {
             })
         });
         this.map = new Map({
-            target: this.$refs['map-root'],
+            target: this.$refs.maproot,
             layers: [
                 // new TileLayer({
                 //     source: new OSM() 
                 // }),
-                forest,
-                // polyline
-
+                forest
             ],
             view:  new View({
                 zoom: 6,
@@ -104,16 +102,15 @@ export default {
             })
         });
     },
-    updated(){
-        console.log('huila')
-    }, 
     methods:{
-        addPolyline(){
-            this.currPath = this.coords
+        addPolyline(mass){
+            for(var i in mass){
+                this.currPath.push(fromLonLat(mass[i]))
+            }
+            console.log(this.currPath)
             var polyline = new Polyline({
                 factor: 1e6
             }).writeGeometry(new LineString(this.currPath));
-
 
             const route = new Polyline({
             factor: 1e6,
@@ -121,6 +118,8 @@ export default {
             dataProjection: 'EPSG:4326',
             featureProjection: 'EPSG:3857',
             });
+
+
 
             const styles = {
                 'route': new Style({
@@ -145,7 +144,7 @@ export default {
             },
             });
             this.map.addLayer(vectorLayer);
-            console.log(this.currPath)
+            console.log(this.map)
             },
             
     }

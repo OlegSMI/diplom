@@ -98,7 +98,9 @@
       <v-col md="8">
         <v-card style="background: transparent" class="my-5 mr-5">
           <Map :coords="coords" :first_coord="first_coord"
-           :user="user" :center="center" :zoom="zoom" style='height: 650px; width: 100%'/>
+           :user="user" :center="center" :zoom="zoom" 
+           ref="maproot"
+           style='height: 650px; width: 100%'/>
         </v-card>
       </v-col>
     </v-row>
@@ -178,6 +180,7 @@ methods: {
       this.center = this.coords[0]
       this.zoom = 15
       this.created = true
+      this.$refs.maproot.addPolyline(this.coords)
   },
     exportExcel () {
 
