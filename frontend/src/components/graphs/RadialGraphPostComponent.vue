@@ -10,11 +10,14 @@ export default {
     components: {
       apexchart: VueApexCharts,
     },
+    props:{
+      data_user: Array
+    },
     data: function(){
        return {
            series: [{
             name: 'Series 1',
-            data: [7, 21, 18, 2, 25, 5],
+            data: this.data_user,
           }],
           chartOptions: {
             chart: {

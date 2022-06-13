@@ -87,7 +87,7 @@
             <h2 class="black--text font-weight-thin ma-2">
               Сравнение с другими пользователями
             </h2>
-              <RadarChart class="donut"/>
+              <RadarChart :data_user="data_user" class="donut"/>
           </v-card-text>
         </v-card>
       </v-col>
@@ -122,11 +122,26 @@ export default {
     return {
       person: [],
       times: [],
+      data_user:[]
     }
   },
   created(){
     this.person = this.$store.getters.getTodoById(Number(this.$route.query.num))
-    console.log('fvffv', this.person)
+    console.log(this.person)
+    console.log(this.countPosts)
+    console.log(this.countFriends)
+    console.log(this.countComments)
+    console.log(this.countPhotos)
+    console.log(this.countGroups)
+    console.log(this.fullActive)
+    this.data_user.push(this.countPosts,
+                        this.countFriends,
+                        this.countComments,
+                        this.countPhotos,
+                        this.countGroups,
+                        this.fullActive
+                        )
+    console.log(this.data_user)
   },
   computed: {
     countFriends: function() {
@@ -137,6 +152,15 @@ export default {
     },
     countComments: function() {
       return ((this.person.comments).length + (this.person.comments_group).length)
+    },
+    countGroups: function() {
+      return (this.person.all_groups).length
+    },
+    countPhotos: function() {
+      return Math.floor(1 + Math.random()*4)
+    },
+    fullActive: function() {
+      return ((this.person.comments).length + (this.person.comments_group).length + (this.person.posts).length)/2
     }
   }
 }

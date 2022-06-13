@@ -47,6 +47,11 @@ const routes = [
       path: '/locationdiagram',
       name: 'locationdiagram',
       component: MyDiagram,
+    },
+    {
+      path: '/we',
+      name: 'we',
+      component: () => import('../views/MyComp.vue')
     }
   ]
 

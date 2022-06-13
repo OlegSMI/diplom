@@ -55,6 +55,7 @@ export default {
     watch: {
     center(val) {
       this.clusterMap.setCenter(val, this.zoom)
+      console.log('uepok')
     },
 
     zoom(val) {
@@ -108,6 +109,7 @@ export default {
       const settings = { lang: 'en_US' };
       await loadYmap(settings);
       console.log(ymaps); 
+      console.log('3')
   },
     async clickPoint(e) {
       let target = e.get("objectId");

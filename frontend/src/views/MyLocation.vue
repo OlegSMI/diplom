@@ -96,7 +96,7 @@
             </v-card>
         </v-col>
       <v-col md="8">
-        <v-card flat style="background: transparent" class="my-5 mr-5">
+        <v-card style="background: transparent" class="my-5 mr-5">
           <Map :coords="coords" :first_coord="first_coord"
            :user="user" :center="center" :zoom="zoom" style='height: 650px; width: 100%'/>
         </v-card>
@@ -113,7 +113,8 @@
 <script>
  /* eslint-disable */
 import axios from 'axios'
-import Map from "@/components/map/MapStrava.vue";
+// import Map from "@/components/map/MapStrava.vue";
+import Map from "./MyComp.vue";
 import { saveExcel } from '@progress/kendo-vue-excel-export';
 
 export default {
@@ -143,6 +144,7 @@ export default {
     center: [59.937, 30.3089],
     first_coord: [],
     load: false,
+    created: false,
     zoom: 10,
     // Таблица
     search: '',
@@ -175,6 +177,7 @@ methods: {
       this.user = route.name
       this.center = this.coords[0]
       this.zoom = 15
+      this.created = true
   },
     exportExcel () {
 
@@ -192,7 +195,6 @@ methods: {
 created() {
   this.center = [this.latitude_1, this.longitude_1]
   this.first_coord = [this.latitude_1+0.005, this.longitude_1+0.005]
-  console.log(this.first_coord)
 },
   computed: {
     url() {
