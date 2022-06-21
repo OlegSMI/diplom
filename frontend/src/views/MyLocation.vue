@@ -8,26 +8,26 @@
                 </v-card-title>
                 <v-card-text>
                   <v-text-field
-                      label="Левая широта"
+                      label="Начальная широта"
                       hide-details="auto"
                       class="ma-2"
                       :value="latitude_1"
                       >
                       </v-text-field>
                   <v-text-field
-                      label="Левая долгота"
+                      label="Начальная долгота"
                       hide-details="auto"
                       class="ma-2"
                       :value="longitude_1"
                       ></v-text-field>
                   <v-text-field
-                      label="Правая широта"
+                      label="Конечная широта"
                       hide-details="auto"
                       class="ma-2"
                       :value="latitude_2"
                       ></v-text-field>
                   <v-text-field
-                      label="Правая долгота"
+                      label="Конечная долгота"
                       hide-details="auto"
                       class="ma-2"
                       :value="longitude_2"
@@ -123,16 +123,16 @@ export default {
     name: 'location',
     props: {
       latitude_1: {
-      default: () => { return 59.937 }
+      default: () => { return 0.0 }
     },
       longitude_1:  {
-      default: () => { return 30.3089 }
+      default: () => { return 0.0 }
       },
       latitude_2: {
-      default: () => { return 52.673 }
+      default: () => { return 0.0 }
     },
       longitude_2:  {
-      default: () => { return 29.345 }
+      default: () => { return 0.0 }
       },
     },
     components: {
@@ -181,6 +181,11 @@ methods: {
       this.zoom = 15
       this.created = true
       this.$refs.maproot.addPolyline(this.coords)
+      console.log(this.coords.slice(-1)[0])
+      this.latitude_1 = this.coords[0][0]
+      this.longitude_1 = this.coords[0][1]
+      this.latitude_2 = this.coords.slice(-1)[0][0]
+      this.longitude_2 = this.coords.slice(-1)[0][1]
   },
     exportExcel () {
 

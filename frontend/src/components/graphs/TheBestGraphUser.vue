@@ -11,6 +11,9 @@ export default {
   components: {
       apexchart: VueApexCharts,
     },
+  props:{
+    dates: Array
+  },
   data: function() {
     return {
       chartOptions: {
@@ -24,7 +27,7 @@ export default {
             show: false
         },
         xaxis: {
-            categories: ["Янв", "Фев", "Март", "Апр", "Май", "Июнь", "Июль", "Авг", "Сент", "Окт", "Нояб", "Дек"],
+            categories: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
             floating: false,
             labels: {
               show: true,
@@ -108,7 +111,7 @@ export default {
       series: [{
           name: '',
           color: '#1E90FF',
-          data: [2, 1, 0, 0, 4, 1, 4, 2, 1, 4, 2, 4]
+          data: this.dates
       }],
     }
   },

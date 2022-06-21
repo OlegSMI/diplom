@@ -66,6 +66,10 @@
                   <div class="caption grey--text">Языки:</div>
                   <div>{{task.languages}}</div>
                 </v-col>
+                <v-col xs="2" sm="4" md="2">
+                  <div class="caption grey--text">Маршрутов:</div>
+                  <div>{{task.locations}}</div>
+                </v-col>
               </v-layout>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
@@ -134,7 +138,7 @@
                       >
                         <v-card-title class="pa-2 grey--text">
                           <h5>Комментарии <br>
-                            в группах:</h5>
+                            на страницах:</h5>
                         </v-card-title>
                         <div class="ma-2" v-for="comment in task.comments" :key="comment">
                         {{comment.comment_text}}
@@ -152,7 +156,7 @@
                       >
                         <v-card-title class="pa-2 grey--text">
                           <h5>Комментарии <br>
-                            на страницах:</h5>
+                             в группах:</h5>
                         </v-card-title>
                         <div class="ma-2" v-for="comment_group in task.comments_group" :key="comment_group.id">
                         {{comment_group.comment_text}}
@@ -214,11 +218,10 @@ export default {
           this.$store.dispatch('loadItems')
           if(this.$store.getters.getState===true){
             if(this.$store.getters.getCount===0){
-              setTimeout(this.theOneFunc, 8 * 1000, 8);
-              this.parseicon = true;
-              this.tasks = this.$store.getters.getItems
+              setTimeout(this.theOneFunc, 2 * 1000, 8);
               this.$store.dispatch('setCount', 1)
-              console.log(this.$store.getters.getCount)
+              this.tasks = this.$store.getters.getItems
+              this.parseicon = true;
             }
             else{
               this.parseicon = false;

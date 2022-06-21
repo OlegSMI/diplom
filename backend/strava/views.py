@@ -9,6 +9,6 @@ from .additional.strava_utils.strava import get_route
 class GetPolyline(APIView):
 
     def get(self, request):
-        time.sleep(4)
+        time.sleep(1)
         massline = get_route()
         return Response(massline)

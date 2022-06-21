@@ -158,8 +158,9 @@ export default {
                           'comments_group': this.persons[i].comments_group
                           })
     }
+    console.log('jj',this.comments)
     for (var j in this.posts){
-      this.users.push(this.persons[i].first_name +' '+ this.persons[i].last_name)
+      this.users.push(this.posts[j].name)
       if(this.posts[j].posts.length>0){
         this.postsUser.push(this.posts[j].posts.length) 
       }
@@ -167,18 +168,18 @@ export default {
         this.postsUser.push(0)
       }
     }
+  
     for (var k in this.comments){
       if(this.comments[k].comments.length>0){
         this.commentsUser.push(this.comments[k].comments.length+this.comments[k].comments_group.length)
       }
       else if(this.comments[k].comments_group.length>0){
-        this.commentsUser.push(this.comments[k].comments_group.length+ this.comments[k].comments_group.length)
+        this.commentsUser.push(this.comments[k].comments.length+this.comments[k].comments_group.length)
       }
       else{
         this.commentsUser.push(0)
       }
     }
-
 
     for (let i = 0; i < 24; i = i + 2){
       this.dates[i] = new Set();

@@ -45,6 +45,17 @@ class GetAllUserInfoInSosialNetwork(APIView):
         users = requests.get('http://127.0.0.1:8888/user/all_users/')
         keywords = [
                     'agressor',
+                    'military',
+                    'ukraine',
+                    'situation',
+                    'toworrow',
+                    'equipment',
+                    'armor',
+                    'attack',
+                    'russia',
+                    'america',
+                    'country',
+                    'green'
                     ]   
         for user in users.json():
             for user_com in user['comments_group']:

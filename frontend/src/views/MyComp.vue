@@ -19,7 +19,7 @@ import LineString from 'ol/geom/LineString.js';
 
 import VectorSource from 'ol/source/Vector';
 import "ol/ol.css";
-import { fromLonLat } from 'ol/proj';
+import { transform } from 'ol/proj';
 // import {
 //   Circle as CircleStyle,
 //   Fill,
@@ -32,10 +32,8 @@ import {Vector as VectorLayer} from 'ol/layer';
 // import Point from 'ol/geom/Point';
 import Feature from 'ol/Feature';
 
-import {
-  Stroke,
-  Style,
-} from 'ol/style';
+import {Stroke, Style} from 'ol/style';
+
 export default {
     name: 'MapStravaOSM',
     components:{},
@@ -59,7 +57,9 @@ export default {
     data() {
         return {
             currPath:[],
-            map: ''
+            map: '',
+            center: transform([30.16, 50.604], 'EPSG:4326','EPSG:3857'),
+            vectorLayer: false,
         }
     },
     // watch: {
@@ -74,16 +74,17 @@ export default {
     mounted() {
         var forest = new TileLayer({
             source: new TileWMS({
-                url: 'http://localhost:8100/geoserver/osm/wms',
+                url: 'http://localhost:8080/geoserver/osm/wms',
                 params: {
                     tiled: true,
                     "LAYERS": [
                         'osm:forestpark', 
                         'osm:states', 
-                        'osm:amenity',
+                        // 'osm:settlements',
                         'osm:water',
+                        'osm:districts',
                         'osm:buildings',
-                        'osm:roads'
+                        // 'osm:roads'
                     ],
                 }
             })
@@ -98,26 +99,34 @@ export default {
             ],
             view:  new View({
                 zoom: 6,
-                center: fromLonLat([31, 49]),
+                center: this.center,
+                projection:'EPSG:3857'
+                // projection: 'EPSG:3395'
             })
         });
     },
     methods:{
         addPolyline(mass){
+            this.map.removeLayer(this.vectorLayer);
+            this.currPath=[]
             for(var i in mass){
-                this.currPath.push(fromLonLat(mass[i]))
+                this.currPath.push(mass[i].reverse())
             }
-            console.log(this.currPath)
+
             var polyline = new Polyline({
                 factor: 1e6
-            }).writeGeometry(new LineString(this.currPath));
+            })
+            .writeGeometry(new LineString(this.currPath));
 
+            console.log(polyline)
             const route = new Polyline({
-            factor: 1e6,
-            }).readGeometry(polyline, {
-            dataProjection: 'EPSG:4326',
-            featureProjection: 'EPSG:3857',
+                factor: 1e6,
+            })
+            .readGeometry(polyline, {
+                dataProjection: 'EPSG:4326',
+                featureProjection: 'EPSG:3857',
             });
+           
 
 
 
@@ -131,21 +140,31 @@ export default {
             }
 
             const routeFeature = new Feature({
-            type: 'route',
-            geometry: route,
+                type: 'route',
+                geometry: route,
             });
+            var sourcer = new VectorSource({
+                features: [],
+            })
+            console.log(sourcer)
+            sourcer.clear()
+            console.log(sourcer)
+            sourcer.addFeature(routeFeature)
+            
+            this.vectorLayer = new VectorLayer({
+                source: sourcer,
+                style: function (feature) {
+                    return styles[feature.get('type')];
+                },
+            });
+            this.map.addLayer(this.vectorLayer);
+            this.map.setView( new View({
+                projection:'EPSG:3857',
+                center: transform(this.currPath[0], 'EPSG:4326','EPSG:3857'),
+                zoom: 15
+            }));
 
-            const vectorLayer = new VectorLayer({
-            source: new VectorSource({
-                features: [routeFeature],
-            }),
-            style: function (feature) {
-                return styles[feature.get('type')];
-            },
-            });
-            this.map.addLayer(vectorLayer);
-            console.log(this.map)
-            },
+        },
             
     }
 }

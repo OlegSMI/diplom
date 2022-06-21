@@ -60,15 +60,30 @@
         <v-card
         class="mx-auto text-center mt-5"
         color="white"
-        dark
+        height="485"
         flat
         max-width="900"
         >
           <v-card-text>
             <h2 class="black--text font-weight-thin ma-2">
-              Недельная ктивность 
+              Действия пользователя:
             </h2>
-              <HeatChart :person="person" class='absolute'/>
+              <!-- <HeatChart :person="person" class='absolute'/> -->
+              <v-list v-for="el in person.posts" :key="el">
+                <v-list-item style="background-color: lightgrey; border-radius:20px;">
+                  {{el.post_text}}
+                </v-list-item>
+              </v-list>
+              <v-list v-for="el in person.comments" :key="el">
+                <v-list-item style="background-color: lightgrey; border-radius:20px;">
+                  {{el.comment_text}}
+                </v-list-item>
+              </v-list>
+              <v-list v-for="el in person.comments_group" :key="el">
+                <v-list-item style="background-color: lightgrey; border-radius:20px;">
+                  {{el.comment_text}}
+                </v-list-item>
+              </v-list>
           </v-card-text>
         </v-card>
       </v-col>
@@ -101,9 +116,9 @@
         >
           <v-card-text>
               <h2 class="black--text font-weight-thin ma-2">
-                Годовая активность
+                Наибольшая активность
               </h2>
-              <BestChart class='absolute'/>
+              <BestChart :dates="count_content" class='absolute'/>
           </v-card-text>
         </v-card>
       </v-col>
@@ -114,26 +129,63 @@
 
 <script>
 import RadarChart from '../components/graphs/RadialGraphPostComponent'
-import HeatChart from '../components/graphs/HeatMapComponent'
+// import HeatChart from '../components/graphs/HeatMapComponent'
 import BestChart from '../components/graphs/TheBestGraphUser'
 export default {
-  components: {RadarChart, HeatChart, BestChart},
+  components: {RadarChart, BestChart},
   data() {
     return {
       person: [],
       times: [],
-      data_user:[]
+      data_user:[],
+      dates: [],
+      count_content: []
     }
   },
   created(){
     this.person = this.$store.getters.getTodoById(Number(this.$route.query.num))
-    console.log(this.person)
-    console.log(this.countPosts)
-    console.log(this.countFriends)
-    console.log(this.countComments)
-    console.log(this.countPhotos)
-    console.log(this.countGroups)
-    console.log(this.fullActive)
+    console.log(this.person.posts)
+
+    for (let i = 0; i < 24; i = i + 2){
+      this.dates[i] = [];
+    }
+
+    for (var h in this.person.posts){
+        for (let i = 0; i < 24; i = i + 2){
+          var timepost = Number(this.person.posts[h].timepost.split(':')[0])
+          if (i <= timepost && timepost < i+2){
+            this.dates[i].push(1) 
+          }   
+        } 
+    }
+
+    for (var u in this.person.comments){
+        for (let i = 0; i < 24; i = i + 2){
+          var timepost2 = Number(this.person.comments[u].timecomment.split(':')[0])
+          if (i <= timepost2 && timepost2 < i+2){
+            this.dates[i].push(1) 
+          }   
+      }  
+    }
+    for (var g in this.person.comments_group){
+      for (let i = 0; i < 24; i = i + 2){
+        var timepost3 = Number(this.person.comments_group[g].timecomment.split(':')[0])
+        if (i <= timepost3 && timepost3 < i+2){
+          this.dates[i].push(1) 
+        }   
+      } 
+    }
+    for (var i in this.dates){
+      if(this.dates[i].length===0){
+        this.count_content.push(0)
+      }
+      else{
+        this.count_content.push(this.dates[i].length)
+      }
+      
+    }
+
+
     this.data_user.push(this.countPosts,
                         this.countFriends,
                         this.countComments,
@@ -141,7 +193,6 @@ export default {
                         this.countGroups,
                         this.fullActive
                         )
-    console.log(this.data_user)
   },
   computed: {
     countFriends: function() {
@@ -157,7 +208,8 @@ export default {
       return (this.person.all_groups).length
     },
     countPhotos: function() {
-      return Math.floor(1 + Math.random()*4)
+      // return Math.floor(1 + Math.random()*4)
+      return 1
     },
     fullActive: function() {
       return ((this.person.comments).length + (this.person.comments_group).length + (this.person.posts).length)/2
@@ -165,11 +217,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.donut {
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
-}
-</style>
